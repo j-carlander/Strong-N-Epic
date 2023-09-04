@@ -1,5 +1,9 @@
+import LoginComponent from "../Components/LoginComponent/LoginComponent";
+
 export function HomePage():JSX.Element{
-    return <>
-    <h2>GymBros</h2>
-    <h1>Strong-N-Epic</h1></>
+    return (
+        <>
+          <LoginComponent />
+        </>
+    )
 }
