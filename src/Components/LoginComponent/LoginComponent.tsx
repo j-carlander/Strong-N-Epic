@@ -1,26 +1,16 @@
 import { FormEvent, useState } from 'react'
-import { InputEvent } from '../../../Types/User.js'
+import { handleInputChange } from '../../service/userService.js';
 
-interface LoginUser {
-  username: string;
-  password: string;
-}
 
-const userInfo: LoginUser = {
-  username: '',
-  password: '',
-} 
+
 
 export default function LoginComponent():JSX.Element {
 
-  const [userId, setUserId] = useState(userInfo);
-
-  function saveUsernameValue(event: InputEvent) {
-    setUserId({...userInfo, username: event.target.value})
-  }
-
-  function savePasswordValue(event: InputEvent) {
-    setUserId({...userInfo, password: event.target.value})
+  const [loginInfo, setLoginInfo] = useState();
+  const [formState, setFormState] = useState('login');
+ 
+  function saveInfo() {
+    handleInputChange(formState)
   }
 
   function submitLoginForm(event: FormEvent) {
@@ -32,9 +22,9 @@ export default function LoginComponent():JSX.Element {
     <>
       <form className='login-form' onSubmit={submitLoginForm}> 
         <label className='user-id-label' htmlFor="usernameField">UserID:</label>
-        <input className='username-field' onChange={saveUsernameValue} type='text' name='username' id="usernameField"></input>
+        <input className='username-field' onChange={saveInfo} type='text' name='username' id="usernameField"></input>
         <label className='password-label' htmlFor="passwordField">Password:</label>
-        <input className='password-label' onChange={savePasswordValue} type='password' name='password' id="passwordField"></input>
+        <input className='password-label' onChange={saveInfo} type='password' name='password' id="passwordField"></input>
         <button className='login-btn'>Login</button>
       </form>
     </>
