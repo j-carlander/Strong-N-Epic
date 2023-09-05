@@ -10,9 +10,13 @@ export function useSetUserInfo(formState: string, ref: string, value: string) {
 
   useEffect(() => {
     if(formState === 'LOGIN') {
-      setLoginUser({...loginUser, [ref]: value});
+      if(ref !== '' || value !== '') {
+        setLoginUser({...loginUser, [ref]: value});
+      }
     }else if(formState === 'REGISTER') {
-      setRegUser({...regUser, [ref]: value});
+      if(ref !== '' || value !== '') {
+        setRegUser({...regUser, [ref]: value});
+      }
     }else{
       return console.error('No formState match');
     }

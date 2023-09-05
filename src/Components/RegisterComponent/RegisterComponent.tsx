@@ -1,7 +1,10 @@
 import { FormEvent, useState } from 'react'
 import { InputEvent, FormState, SelectEvent } from '../../../Types/Form.js';
 import { useSetUserInfo } from '../../hooks/userHook.js';
+import authService from '../../service/authService.js';
+
 import './RegisterComponent.css';
+
 
 type FormStateProps = {
   formState: FormState;
@@ -29,10 +32,10 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
     props.setFormState("LOGIN");
   }
 
-  function submitRegForm(event: FormEvent) {
+  async function submitRegForm(event: FormEvent) {
     event.preventDefault();
     if(regUser.password === confirmedPw) {
-      console.log("Its a match!")
+      await authService.registration(regUser)
     }else {
       console.log("Something went wrong");
     }
@@ -50,6 +53,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
 
         <label className='gender-label' htmlFor="genderField">Gender:</label>
         <select className='gender-field' name="gender" onChange={handleRegInfo} value={regUser.gender} id="genderField">
+          <option disabled value="empty"></option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
@@ -65,7 +69,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
         <label className='phone-label' htmlFor="phoneField">Phone:</label>
         <input className='phone-field' onChange={handleRegInfo} type='phone' name='phone' value={regUser.phone || ''} id="phoneField"></input>
 
-        <label className='user-id-label' htmlFor="usernameField">UserID:</label>
+        <label className='user-id-label' htmlFor="usernameField">Username:</label>
         <input className='username-field' onChange={handleRegInfo} type='text' name='username' value={regUser.username || ''} id="usernameField"></input>
 
         <label className='password-label' htmlFor="passwordField">Password:</label>
@@ -74,7 +78,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
         <label className='repassword-label' htmlFor="repasswordField">Confirm password:</label>
         <input className='repassword-field' onChange={saveConfirmedPassword} type='password' name='repassword' id="repasswordField"></input>
 
-        <button className='login-btn'>Login</button>
+        <button className='login-btn'>Sign up</button>
       </form>
       <aside>
         <p>Already a member?</p>

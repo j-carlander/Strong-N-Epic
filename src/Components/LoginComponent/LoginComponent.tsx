@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { FormState, InputEvent } from '../../../Types/Form';
 import { useSetUserInfo } from '../../hooks/userHook.js';
+import authService from '../../service/authService.js';
 
 
 type FormStateProps = {
@@ -27,9 +28,7 @@ export default function LoginComponent(props: FormStateProps):JSX.Element {
 
   function submitLoginForm(event: FormEvent) {
     event.preventDefault();
-    console.log(loginUser.username);
-    console.log(loginUser.password);
-    // fetch(url);
+    authService.login(loginUser);
   }
 
   return (
