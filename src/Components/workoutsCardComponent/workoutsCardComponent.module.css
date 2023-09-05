@@ -1,17 +1,14 @@
-* {
+.container > * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .workoutsComponent {
-    width: 90%;
-    aspect-ratio: 4 / 1;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.8em;
     margin: 1em auto;
     background: linear-gradient(70deg, rgba(217,217,217,1) 0%, rgba(170,170,170,1) 100%);
-    border: 1px solid #999;
+    border: 1px solid #666;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -25,16 +22,18 @@
 .workoutsComponentButton {
     height: 3em;
     background-color: #5C8374;
-    background: linear-gradient(70deg, #82a799  0%, #5C8374 100%);
-    border: 1px solid #999;
+    border: 1px solid #666;
     border-radius: 8px;
-    margin-bottom: 0.2em;
+    margin: 0.5em 0 0.2em 0;
     font-size: 1.2em;
 }
 
-.workoutsComponentCity {
-    font-size: 0.7em;
-    text-align: right
+.workoutsComponentTime {
+    font-size: 0.9em;
+}
+
+.workoutsComponentCity, .workoutsComponentSpots {
+    font-size: 0.8em;
 }
 
 .container {
