@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+
+  margin: 1em auto;
+  padding: 0.3em;
+}
+
+.container {
+  background-color: #5c8374;
+  min-width: 336px;
+  min-height: 1em;
+  padding: 0.5em;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.change-view-btn {
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  border-color: transparent;
+
+  width: 12em;
+
+  background-color: #183d3d;
+  color: #fff;
+}
+
+.active {
+  background-color: #5c8374;
+}

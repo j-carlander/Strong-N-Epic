@@ -1,8 +1,9 @@
 export type UserRole = "USER" | "ADMIN";
 
-export type gender = "I prefer not to say" | "Male" | "Female" | "Other";
+export type Gender = "I prefer not to say" | "Male" | "Female" | "Other";
 
-export interface AuthUser {
+export interface User {
+  _id: "string";
   username: string;
   role: UserRole;
 }
