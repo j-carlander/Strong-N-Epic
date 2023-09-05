@@ -1,8 +1,9 @@
 details {
-  width: 20em;
+  max-width: 20em;
   padding: 0.5em;
   margin: 0.5em auto;
   box-shadow: 3px 3px 5px 2px grey;
+  background-color: #fff;
 }
 
 details summary {

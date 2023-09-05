@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { User } from "../../../Types/User";
 import { UserItem } from "../UserItem/UserItem";
 
+// TODO: Remove and use session storage
 const testToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvcnJlQWRtaW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTM5MTE2MTUsImlzcyI6IlRvRG8gUmVhY3QgVFMiLCJzdWIiOiJzZW5kIGFuZCByZWNlaXZlIGFjY2VzcyB0b2tlbiJ9.coIBFkEiBMBTwwU_bHyafPPDVCbCFNswNW3-Eeqrupk";
 
@@ -28,10 +29,10 @@ export function UserList(): JSX.Element {
     fetchUsers();
   }, []);
   return (
-    <article>
+    <>
       {users.map((user) => (
         <UserItem user={user} key={user._id} />
       ))}
-    </article>
+    </>
   );
 }
