@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UserList } from "../UserList/UserList";
 import styles from "./AdminView.module.css";
+import { WorkoutsList } from "../WorkoutsList/WorkoutsList";
 
 type ActiveView = "USERS" | "WORKOUTS";
 
@@ -31,6 +32,7 @@ export function AdminView(): JSX.Element {
       </div>
       <section className={styles.container}>
         {activeView === "USERS" && <UserList />}
+        {activeView === "WORKOUTS" && <WorkoutsList />}
       </section>
     </article>
   );
