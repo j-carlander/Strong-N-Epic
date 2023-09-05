@@ -1,0 +1,26 @@
+details {
+  width: 20em;
+  padding: 0.5em;
+  margin: 0.5em auto;
+  box-shadow: 3px 3px 5px 2px grey;
+}
+
+details summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+details summary > * {
+  display: inline;
+}
+
+details summary::after {
+  content: "Show details ►";
+}
+
+details[open] summary:after {
+  content: "Hide details ▼";
+}
