@@ -1,0 +1,9 @@
+.age-field::-webkit-outer-spin-button,
+.age-field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.age-field[type=number]{
+  -moz-appearance: textfield;
+}
