@@ -8,7 +8,7 @@ function getSessionValue(ref: string) {
   const value = sessionStorage.getItem(ref);
 
   if(!value) {
-    throw new Error("Value is not of type string");
+    throw new Error("blabla");
   }
   
   return JSON.parse(value);

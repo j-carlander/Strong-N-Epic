@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { InputEvent, FormState, SelectEvent } from '../../../Types/Form.js';
+import { InputEvent, FormState, SelectEvent, ButtonEvent } from '../../../Types/Form.js';
 import { useSetUserInfo } from '../../hooks/userHook.js';
 import authService from '../../service/authService.js';
 
@@ -28,7 +28,8 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
     setConfirmedPw(event.target.value);
   }
 
-  function changeFormState() {
+  function changeFormState(event: ButtonEvent) {
+    event.preventDefault();
     props.setFormState("LOGIN");
   }
 
@@ -81,7 +82,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
       </form>
       <aside>
         <p>Already a member?</p>
-        <a onClick={changeFormState}>Sign in</a>
+        <button className='change-formstate-btn' onClick={changeFormState}>Sign in</button>
         <p>here!</p>
       </aside> 
     </section>
