@@ -31,7 +31,7 @@ export function WorkoutsList(): JSX.Element {
   return (
     <>
       {workouts.map((workout) => (
-        <WorkoutsCardComponent key={workout._id} />
+        <WorkoutsCardComponent key={workout._id} workout={workout} />
       ))}
     </>
   );
