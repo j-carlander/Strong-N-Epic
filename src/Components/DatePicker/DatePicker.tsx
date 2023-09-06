@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { InputEvent } from "../../../Types/Form";
-import { DayBtn } from "../DayBtn/DayBtn";
+import { DayBtn, NextWeekBtn, PrevWeekBtn } from "../DayBtn/DayBtns";
+import styles from "./DatePicker.module.css";
 
 export function DatePicker(): JSX.Element {
-  const [chosenDate, setChosenDate] = useState<Date>(new Date());
+  const [chosenDate, setChosenDate] = useState<Date>(new Date()); // TODO: need to be a prop to work as a filter
 
   function theOtherDay(date: Date, offsetDays: number): Date {
     const time: number = date.getTime();
@@ -21,23 +22,33 @@ export function DatePicker(): JSX.Element {
     theOtherDay(chosenDate, 3),
   ];
 
-  // function handleInputChange(e: InputEvent): void {
-  //     const newDate = new Date(e.target.value)
-  //     setChosenDate(newDate)
-  // }
-  console.log(surrondingWeek[3]);
   return (
-    <>
+    <article className={styles["datepicker-container"]}>
       <input
         type="date"
         value={chosenDate.toLocaleDateString()}
         onChange={(e: InputEvent) => setChosenDate(new Date(e.target.value))}
       />
-      <section>
+      <section className={styles["day-btn-container"]}>
         {surrondingWeek.map((date) => (
-          <DayBtn date={date} />
+          <DayBtn
+            date={date}
+            key={date.toDateString()}
+            setDate={setChosenDate}
+          />
         ))}
       </section>
-    </>
+      <section className={styles["prev-next-btn-container"]}>
+        <PrevWeekBtn
+          date={theOtherDay(chosenDate, -7)}
+          setDate={setChosenDate}
+        />
+        <span>|</span>
+        <NextWeekBtn
+          date={theOtherDay(chosenDate, 7)}
+          setDate={setChosenDate}
+        />
+      </section>
+    </article>
   );
 }
