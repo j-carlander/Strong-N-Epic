@@ -9,6 +9,9 @@ interface workoutProps {
 export default function WorkoutsCardComponent({ workout }: workoutProps): JSX.Element {
   const formattedStartTime: Date = new Date(workout.startTime)
   const endTime: Date = new Date(formattedStartTime.getTime() + workout.durationInMin * 60000)
+  let isDisabled: boolean;
+
+  if (workout.participants.length >= workout.maxAllowedParticipants) { isDisabled = true; } else { isDisabled = false; }
 
   return (
     <article className={styles.workoutsComponent}>
@@ -19,7 +22,7 @@ export default function WorkoutsCardComponent({ workout }: workoutProps): JSX.El
         <p className={styles.workoutsComponentSpots}>{workout.maxAllowedParticipants - workout.participants.length} spots available (of {workout.maxAllowedParticipants})</p>
       </div>
       <div className={styles.container}>
-        <button className={styles.workoutsComponentButton}>Book</button>
+        <button className={styles.workoutsComponentButton} disabled={isDisabled}>Book</button>
         <p className={styles.workoutsComponentCity}>&#x1F588;{workout.city}</p>
       </div>
     </article>
