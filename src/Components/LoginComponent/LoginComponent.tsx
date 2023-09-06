@@ -5,20 +5,19 @@ import authService from '../../service/authService.js';
 import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
 
-
-type FormStateProps = {
+type Props = {
   formState: FormState;
   setFormState: (formState: FormState) => void;
+  setCurrentUser: (currentUser: string) => void;
 }
 
-
-export default function LoginComponent(props: FormStateProps):JSX.Element {
+export default function LoginComponent({formState, setFormState, setCurrentUser}: Props):JSX.Element {
 
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
   const navigate = useNavigate()
 
-  const { loginUser } = useSetUserInfo(props.formState, ref, value);
+  const { loginUser } = useSetUserInfo(formState, ref, value);
 
   function handleLoginInfo(event: InputEvent) {
     setRef(event.target.name); 
@@ -27,7 +26,7 @@ export default function LoginComponent(props: FormStateProps):JSX.Element {
 
   function changeFormState(event: ButtonEvent) {
     event.preventDefault();
-    props.setFormState("REGISTER");
+    setFormState("REGISTER");
   }
 
   function logout(event: ButtonEvent) {
@@ -43,6 +42,7 @@ export default function LoginComponent(props: FormStateProps):JSX.Element {
     const userInfo = memoryService.getSessionValue("USER_INFO");
     
     if(userInfo.username && userInfo.role === "USER"){
+      setCurrentUser(userInfo.username);
       navigate("/workout");
     }else if(userInfo.username && userInfo.role === "ADMIN") {
       navigate("/admin");

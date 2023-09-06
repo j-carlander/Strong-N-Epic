@@ -7,12 +7,17 @@ import { PageHeader } from "../Components/PageHeader/PageHeader.js";
 
 export function HomePage(): JSX.Element {
   const [formState, setFormState] = useState("LOGIN" as FormState);
+  const [currentUser, setCurrentUser] = useState("Guest");
 
   return (
     <>
-      <PageHeader />
+      <PageHeader currentUser={currentUser} />
       {formState === "LOGIN" && (
-        <LoginComponent formState={formState} setFormState={setFormState} />
+        <LoginComponent 
+          formState={formState}
+          setFormState={setFormState}
+          setCurrentUser={setCurrentUser}
+        />
       )}
 
       {formState === "REGISTER" && (
