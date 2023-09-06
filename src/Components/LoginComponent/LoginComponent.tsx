@@ -43,11 +43,13 @@ export default function LoginComponent(props: FormStateProps):JSX.Element {
     const userInfo = memoryService.getSessionValue("USER_INFO");
     
     if(userInfo.username && userInfo.role === "USER"){
-      // navigate("/workouts");
+      navigate("/workout");
     }else if(userInfo.username && userInfo.role === "ADMIN") {
-      // navigate("/admin");
+      navigate("/admin");
     }else {
-      throw new Error("Login went wrong");
+      memoryService.removeSessionValue("JWT_TOKEN");
+      memoryService.removeSessionValue("USER_INFO");
+      throw new Error("Login went wrong, verify your login credentials");
     }
   }
 

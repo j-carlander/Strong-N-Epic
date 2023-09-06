@@ -36,7 +36,13 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
   async function submitRegForm(event: FormEvent) {
     event.preventDefault();
     if(regUser.password === confirmedPw) {
-      await authService.registration(regUser);
+      const result = await authService.registration(regUser);
+      if(result.status === 201) {
+        props.setFormState("LOGIN");
+      }else {
+        throw new Error(`Status: ${result.status}, Msg: ${result.data.msg}`);
+      }
+      
     }else {
       console.log("Something went wrong");
     }
