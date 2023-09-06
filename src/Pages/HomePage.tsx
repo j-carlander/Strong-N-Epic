@@ -3,14 +3,14 @@ import LoginComponent from "../Components/LoginComponent/LoginComponent";
 import RegisterComponent from "../Components/RegisterComponent/RegisterComponent";
 
 import { FormState } from "../../Types/Form.js";
+import { PageHeader } from "../Components/PageHeader/PageHeader.js";
 
 export function HomePage(): JSX.Element {
   const [formState, setFormState] = useState("LOGIN" as FormState);
 
   return (
     <>
-      <h2>GymBros</h2>
-      <h1>Strong-N-Epic</h1>
+      <PageHeader />
       {formState === "LOGIN" && (
         <LoginComponent formState={formState} setFormState={setFormState} />
       )}
