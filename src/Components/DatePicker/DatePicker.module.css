@@ -1,0 +1,14 @@
+.datepicker-container {
+  width: fit-content;
+}
+
+.day-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-block: 0.2em;
+}
+
+.prev-next-btn-container {
+  display: flex;
+  justify-content: space-around;
+}

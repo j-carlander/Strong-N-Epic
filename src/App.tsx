@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import { HomePage } from "./Pages/HomePage";
 import { AdminPage } from "./Pages/AdminPage";
+import { WorkoutPage } from "./Pages/WorkoutPage";
 
 type Route = {
   path: string;
@@ -17,6 +18,10 @@ function App() {
     {
       path: "/admin",
       element: <AdminPage />,
+    },
+    {
+      path: "/workout",
+      element: <WorkoutPage />,
     },
   ];
 
