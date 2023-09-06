@@ -2,15 +2,16 @@ import { memo, useEffect, useRef, useState } from "react";
 import { Location, NavLink, useLocation } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
+import { useCurrentUser } from "../../hooks/currentUserHook";
 
 type Props = {
-  currentUser: string; 
+  loggedIn: boolean;
 }
 
-export function PageHeader({currentUser}: Props): JSX.Element {
+export function PageHeader({loggedIn}: Props): JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-
+  const {currentUser} = useCurrentUser(loggedIn);
 
   const currentLocation: Location = useLocation();
   return (
