@@ -1,14 +1,12 @@
 // import React from 'react'
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
+import memoryService from "../../service/memoryService";
+import { User } from "../../../Types/User";
 
 interface workoutProps {
   workout: Workout;
 }
-
-const attendExercise = () => {
-  alert("testing");
-};
 
 export default function WorkoutsCardComponent({
   workout,
@@ -17,12 +15,49 @@ export default function WorkoutsCardComponent({
   const endTime: Date = new Date(
     formattedStartTime.getTime() + workout.durationInMin * 60000
   );
+
+  const currentUser = memoryService.getSessionValue("USER_INFO") as User;
+  const token = memoryService.getSessionValue("JWT_TOKEN");
+
   let isDisabled: boolean;
 
   if (workout.participants.length >= workout.maxAllowedParticipants) {
     isDisabled = true;
   } else {
     isDisabled = false;
+  }
+
+  let isBooked: boolean = false;
+
+  if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
+
+  async function attendExercise(): Promise<void> {
+    if (!workout._id || !currentUser) return;
+
+    const url = "http://127.0.0.1:8000/api/workout";
+    const headersList = {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    };
+    const bodyContent = JSON.stringify({
+      id: workout._id,
+      participant: currentUser.username,
+    });
+    const options = {
+      method: "PUT",
+      headers: headersList,
+      body: bodyContent,
+    };
+
+    const response = await fetch(url, options);
+    if (response.status === 200) {
+      currentUser.bookedWorkouts.push(workout._id);
+      memoryService.saveSessionValue("USER_INFO", currentUser);
+    }
+  }
+
+  function cancelExercise() {
+    console.log("Hej då");
   }
 
   return (
@@ -51,12 +86,21 @@ export default function WorkoutsCardComponent({
         </p>
       </div>
       <div className={styles.container}>
-        <button
-          className={styles.workoutsComponentButton}
-          onClick={attendExercise}
-          disabled={isDisabled}>
-          Book
-        </button>
+        {!isBooked ? (
+          <button
+            className={styles.workoutsComponentButton}
+            onClick={attendExercise}
+            disabled={isDisabled}>
+            Book
+          </button>
+        ) : (
+          <button
+            className={styles.workoutsComponentButtonCancel}
+            onClick={cancelExercise}
+            disabled={isDisabled}>
+            Cancel
+          </button>
+        )}
         <p className={styles.workoutsComponentCity}>&#x1F588;{workout.city}</p>
       </div>
     </article>
