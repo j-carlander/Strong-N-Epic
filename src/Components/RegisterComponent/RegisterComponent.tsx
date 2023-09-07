@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect } from 'react'
 import { InputEvent, SelectEvent } from '../../../Types/Form.js';
 import authService from '../../service/authService.js';
 import './RegisterComponent.css';
-import { RegUser } from '../../../Types/User.js';
+import { User } from '../../../Types/User.js';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,7 +10,7 @@ export default function RegisterComponent():JSX.Element {
 
   const navigate = useNavigate();
   
-  const [regUser, setRegUser] = useState({} as RegUser);
+  const [regUser, setRegUser] = useState({} as User);
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
   const [confirmedPw, setConfirmedPw] = useState('');

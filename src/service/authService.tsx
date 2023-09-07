@@ -1,9 +1,10 @@
+import { User } from "../../Types/User.js";
 import memoryService from "./memoryService.js";
-import { LoginUser, RegUser } from "../../Types/User.js";
+
 
 const baseURL = "http://127.0.0.1:8000"
 
-async function login(loginUser: LoginUser) {
+async function login(user: User) {
   const url = baseURL + "/auth/login";
   const fetchOptions = {
     method: "POST",
@@ -11,8 +12,8 @@ async function login(loginUser: LoginUser) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username: loginUser.username,
-      password: loginUser.password,
+      username: user.username,
+      password: user.password,
     }),
   };
 
@@ -27,7 +28,7 @@ async function login(loginUser: LoginUser) {
   return { status: response.status, data };
 }
 
-async function registration(regUser: RegUser) {
+async function registration(user: User) {
     const url = baseURL + "/auth/register";
     const fetchOptions = {
       method: "POST",
@@ -35,14 +36,14 @@ async function registration(regUser: RegUser) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        age: regUser.age,
-        email: regUser.email,
-        firstname: regUser.firstname,
-        gender: regUser.gender,
-        lastname: regUser.lastname,
-        password: regUser.password,
-        phone: regUser.phone,
-        username: regUser.username,
+        age: user.age,
+        email: user.email,
+        firstname: user.firstname,
+        gender: user.gender,
+        lastname: user.lastname,
+        password: user.password,
+        phone: user.phone,
+        username: user.username,
       }),
     };
     const response = await fetch(url, fetchOptions);

@@ -3,6 +3,7 @@ import { Location, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
 import memoryService from "../../service/memoryService";
+import { User } from "../../../Types/User";
 
 
 export function PageHeader(): JSX.Element {
@@ -10,17 +11,13 @@ export function PageHeader(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const currentUser = memoryService.getSessionValue("USER_INFO");
-
-  console.log(currentUser);
+  const currentUser = memoryService.getSessionValue("USER_INFO") as User;
 
   function logOut() {
     memoryService.removeSessionValue("JWT_TOKEN");
     memoryService.removeSessionValue("USER_INFO");
     navigate("/login");
   }
-
-  // currentUser.role === "ADMIN" ? styles["sign-out-admin-btn"] : styles["sign-out-user-btn"] 
 
   const currentLocation: Location = useLocation();
   return (

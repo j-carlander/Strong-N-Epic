@@ -2,7 +2,9 @@ import { User } from "../../Types/User";
 import memoryService from "./memoryService";
 import { Workout } from "../../Types/Workout";
 
+const currentUser = memoryService.getSessionValue("USER_INFO") as User;
 const token = memoryService.getSessionValue("JWT_TOKEN") as string;
+
 
 const url = "http://127.0.0.1:8000";
 
@@ -21,7 +23,8 @@ async function getWorkouts(): Promise<Workout[]> {
   if (result.status !== 200) throw new Error("No workouts found");
 
   return await result.json();
-}
+};
+
 
 async function putWorkout(
   workoutId: string,
@@ -38,9 +41,8 @@ async function putWorkout(
     headers: headersList,
     body: bodyContent,
   };
-
   return await fetch(uri, options);
-}
+};
 
 async function postWorkout(content: Workout): Promise<Response> {
   const url = "http://127.0.0.1:8000/api/workout";
@@ -51,8 +53,21 @@ async function postWorkout(content: Workout): Promise<Response> {
     headers: headersList,
     body: bodyContent,
   };
-
   return await fetch(url, options);
-}
+};
 
-export default { getWorkouts, putWorkout, postWorkout };
+async function getUsers() {
+  const uri  = url + "/api/user";
+
+  const options = {
+    method: "GET",
+    headers: headersList,
+  };
+  const result = await fetch(uri, options);
+  if (result.status !== 200) throw new Error("No users found");
+  const data = await result.json();
+
+  return data;
+};
+
+export default { getWorkouts, putWorkout, postWorkout, getUsers };
