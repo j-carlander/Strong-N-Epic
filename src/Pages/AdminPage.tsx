@@ -5,6 +5,7 @@ export function AdminPage(): JSX.Element {
   return (
     <>
       <PageHeader />
+
       <AdminView />
     </>
   );

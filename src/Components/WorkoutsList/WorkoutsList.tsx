@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Workout } from "../../../Types/Workout";
 import WorkoutsCardComponent from "../workoutsCardComponent/WorkoutsCardComponent";
+import { WorkoutDialogForm } from "../WorkoutForm/WorkoutDialogForm";
 
 // TODO: Remove and use session storage
 const testToken =
@@ -30,6 +31,7 @@ export function WorkoutsList(): JSX.Element {
   }, []);
   return (
     <>
+      <WorkoutDialogForm />
       {workouts.map((workout) => (
         <WorkoutsCardComponent key={workout._id} workout={workout} />
       ))}
