@@ -4,6 +4,7 @@ import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
 import authService from '../../service/authService.js';
 import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
+import './LoginComponent.css';
 
 type Props = {
   formState: FormState;
@@ -29,12 +30,6 @@ export default function LoginComponent({formState, setFormState, setLoggedIn}: P
     setFormState("REGISTER");
   }
 
-  function logout(event: ButtonEvent) {
-    event.preventDefault();
-    memoryService.removeSessionValue("JWT_TOKEN");
-    memoryService.removeSessionValue("USER_INFO");
-  }
-
   async function submitLoginForm(event: FormEvent) {
     event.preventDefault();
     await authService.login(loginUser);
@@ -57,14 +52,13 @@ export default function LoginComponent({formState, setFormState, setLoggedIn}: P
   return (
     <section>
       <form className='login-form' onSubmit={submitLoginForm}> 
-        <label className='user-id-label' htmlFor="usernameField">UserID:</label>
+        <label className='username-label' htmlFor="usernameField">Username:</label>
         <input required autoFocus className='username-field' onChange={handleLoginInfo} type='text' name='username' value={loginUser.username || ''} id="usernameField"></input>
         <label className='password-label' htmlFor="passwordField">Password:</label>
-        <input required className='password-label' onChange={handleLoginInfo} type='password' name='password' value={loginUser.password || ''} id="passwordField"></input>
+        <input required className='password-field' onChange={handleLoginInfo} type='password' name='password' value={loginUser.password || ''} id="passwordField"></input>
         <button className='login-btn'>Login</button>
-        <button onClick={logout}>Logout</button>
       </form>
-      <aside>
+      <aside className='register-option'>
         <p>Not a member?</p>
         <button className='change-formstate-btn' onClick={changeFormState}>Sign up</button>
         <p>today!</p>
