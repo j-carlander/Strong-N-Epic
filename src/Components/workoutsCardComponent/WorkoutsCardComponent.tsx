@@ -35,7 +35,7 @@ export default function WorkoutsCardComponent({
           {formattedStartTime.toLocaleDateString()}
         </p>
         <p className={styles.workoutsComponentSpots}>
-          {workout.maxAllowedParticipants - workout.participants?.length} spots
+          {workout.maxAllowedParticipants - workout.participants.length} spots
           available (of {workout.maxAllowedParticipants})
         </p>
       </div>
