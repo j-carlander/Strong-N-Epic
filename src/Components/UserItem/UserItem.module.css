@@ -4,6 +4,7 @@ details {
   margin: 0.5em auto;
   box-shadow: 3px 3px 5px 2px grey;
   background-color: #fff;
+  color: #000;
 }
 
 details summary {
