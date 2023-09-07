@@ -3,6 +3,7 @@ import { Location, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
 import memoryService from "../../service/memoryService";
+import { User } from "../../../Types/User";
 
 
 export function PageHeader(): JSX.Element {
@@ -10,7 +11,7 @@ export function PageHeader(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const currentUser = memoryService.getSessionValue("USER_INFO");
+  const currentUser = memoryService.getSessionValue("USER_INFO") as User;
 
   function logOut() {
     memoryService.removeSessionValue("JWT_TOKEN");

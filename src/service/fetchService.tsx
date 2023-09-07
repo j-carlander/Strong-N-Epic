@@ -71,4 +71,19 @@ async function postWorkout(
   throw new Error("Wasn't able to POST a new workout");
 }
 
-export default { getWorkouts, putWorkout, postWorkout };
+
+async function getUsers() {
+  const uri  = url + "/api/user";
+
+  const options = {
+    method: "GET",
+    headers: headersList,
+  };
+  const result = await fetch(uri, options);
+  if (result.status !== 200) throw new Error("No users found");
+  const data = await result.json();
+
+  return data;
+}
+
+export default { getWorkouts, putWorkout, postWorkout, getUsers };
