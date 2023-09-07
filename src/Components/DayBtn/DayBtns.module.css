@@ -30,6 +30,10 @@
   border: 2px solid transparent;
   font-size: 1.1rem;
   font-weight: 500;
+  color: white;
+}
+.week-btn:disabled {
+  color: rgba(255, 255, 255, 0.151);
 }
 
 .week-btn:hover:not([disabled]) {
