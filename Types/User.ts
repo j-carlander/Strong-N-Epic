@@ -2,9 +2,8 @@ export type UserRole = "USER" | "ADMIN";
 
 export type Gender = "I prefer not to say" | "Male" | "Female" | "Other";
 
-
 export interface User {
-  _id: "string";
+  bookedWorkouts: string[];
   username: string;
   role: UserRole;
 }
@@ -24,4 +23,3 @@ export interface RegUser {
   username: string;
   password: string;
 }
-

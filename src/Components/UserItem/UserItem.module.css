@@ -1,9 +1,16 @@
 details {
-  max-width: 20em;
-  padding: 0.5em;
+  width: 100%;
+  padding: 0.8em;
   margin: 0.5em auto;
+  border-radius: 10px;
   box-shadow: 3px 3px 5px 2px grey;
   background-color: #fff;
+  color: #000;
+}
+
+details h3, p {
+  margin: 0;
+  padding: 0;
 }
 
 details summary {

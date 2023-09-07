@@ -31,8 +31,12 @@
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: 0.3em;
+  background-color: #183d3d;
+  color: #fff;
 }
 
 .close-btn {
   align-self: flex-end;
+  padding-inline: 1em;
+  background-color: #cfa5b6;
 }
