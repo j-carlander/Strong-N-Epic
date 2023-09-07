@@ -56,6 +56,10 @@ export function PageHeader({loggedIn}: Props): JSX.Element {
       <div>
         <img className={styles.logo} src={blackLogo} alt="Strong'N'Epic" />
       </div>
+      <div className={styles.logRegContainer}>
+        <NavLink to={"/register"}><button className={styles.logRegBtn}>Register</button></NavLink>
+        <NavLink to={"/login"}><button className={styles.logRegBtn}>Login</button></NavLink>
+      </div>
     </header>
   );
 }
