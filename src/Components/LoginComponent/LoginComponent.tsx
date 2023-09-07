@@ -23,6 +23,7 @@ export default function LoginComponent():JSX.Element {
     setValue(event.target.value);
   }
 
+
   async function submitLoginForm(event: FormEvent) {
     event.preventDefault();
     await authService.login(loginUser);
