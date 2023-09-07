@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Location, NavLink, useLocation } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
