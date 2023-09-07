@@ -1,10 +1,14 @@
 import { AdminView } from "../Components/AdminView/AdminView";
 import { PageHeader } from "../Components/PageHeader/PageHeader";
 
-export function AdminPage(): JSX.Element {
+type Props = {
+  loggedIn: boolean;
+};
+
+export function AdminPage({ loggedIn }: Props): JSX.Element {
   return (
     <>
-      <PageHeader />
+      <PageHeader loggedIn={loggedIn} />
       <AdminView />
     </>
   );

@@ -1,0 +1,22 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5em;
+}
+
+.username-field,
+.password-field {
+  margin-bottom: 0.8em;
+  padding: 0.25em 0 0.25em 0;
+}
+
+.register-option {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 7em;
+}
+
+.change-formstate-btn {
+  font-size: 0.8rem;
+  padding: 0 1em 0 1em;
+}
