@@ -14,3 +14,19 @@ export interface Workout {
   recurring: Recurring;
   durationInMin: number;
 }
+
+export const workoutTypes: WorkoutType[] = [
+  "Spinning",
+  "Aerobics",
+  "Gympa",
+  "Dans",
+  "Yoga",
+];
+
+export const cities: City[] = ["Norrtälje", "Åkersberga"];
+
+export const recurring: Recurring[] = [
+  "just_once",
+  "every_week",
+  "every_other_week",
+];

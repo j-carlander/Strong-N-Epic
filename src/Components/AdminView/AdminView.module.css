@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: max-content;
+  width: clamp(10em, 90%, 30em);
 
   margin: 1em auto;
   padding: 0.3em;
@@ -9,7 +9,7 @@
 
 .container {
   background-color: #5c8374;
-  min-width: 336px;
+
   min-height: 1em;
   padding: 0.5em;
 }
@@ -24,7 +24,7 @@
   border-top-right-radius: 0.5em;
   border-color: transparent;
 
-  width: 12em;
+  width: clamp(8em, 40%, 20em);
 
   background-color: #183d3d;
   color: #fff;
