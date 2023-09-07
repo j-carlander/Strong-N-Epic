@@ -30,9 +30,10 @@ export function WorkoutsList(): JSX.Element {
   }, []);
   return (
     <>
-      {workouts.map((workout) => (
-        <WorkoutsCardComponent key={workout._id} workout={workout} />
-      ))}
+      {workouts.length > 0 &&
+        workouts.map((workout) => (
+          <WorkoutsCardComponent key={workout._id} workout={workout} />
+        ))}
     </>
   );
 }
