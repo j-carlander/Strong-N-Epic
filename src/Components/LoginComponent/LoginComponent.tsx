@@ -1,33 +1,28 @@
-import { FormEvent, useState } from 'react'
-import { FormState, InputEvent, ButtonEvent } from '../../../Types/Form';
-import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
+import { FormEvent, useState, useEffect } from 'react'
+import { InputEvent } from '../../../Types/Form';
 import authService from '../../service/authService.js';
 import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
 import './LoginComponent.css';
+import { LoginUser } from '../../../Types/User.js';
 
-type Props = {
-  formState: FormState;
-  setFormState: (formState: FormState) => void;
-}
-
-export default function LoginComponent({formState, setFormState}: Props):JSX.Element {
+export default function LoginComponent():JSX.Element {
 
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
+  const [loginUser, setLoginUser] = useState({} as LoginUser);
   const navigate = useNavigate()
 
-  const { loginUser } = useSetUserInfo(formState, ref, value);
+  useEffect(() => {
+    setLoginUser({...loginUser, [ref]: value});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ref, value])
 
   function handleLoginInfo(event: InputEvent) {
     setRef(event.target.name); 
     setValue(event.target.value);
   }
 
-  function changeFormState(event: ButtonEvent) {
-    event.preventDefault();
-    setFormState("REGISTER");
-  }
 
   async function submitLoginForm(event: FormEvent) {
     event.preventDefault();
@@ -57,7 +52,7 @@ export default function LoginComponent({formState, setFormState}: Props):JSX.Ele
       </form>
       <aside className='register-option'>
         <p>Not a member?</p>
-        <button className='change-formstate-btn' onClick={changeFormState}>Sign up</button>
+        <button className='change-formstate-btn' onClick={(() => navigate("/register"))}>Sign up</button>
         <p>today!</p>
       </aside>
     </section>
