@@ -38,7 +38,11 @@ dialog ul {
   cursor: pointer;
 }
 
-.current-user-options {
+.current-user-user-options {
+  display: flex;
+  margin-left: 25em;
+}
+.current-user-admin-options {
   display: flex;
 }
 .logo {
@@ -53,3 +57,11 @@ dialog ul {
   margin-left: 0.5em;
   cursor: pointer;
 }
+/* .sign-out-user-btn {
+  font-size: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  margin-left: 10em;
+  cursor: pointer;
+} */

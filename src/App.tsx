@@ -3,6 +3,8 @@ import "./App.css";
 import { HomePage } from "./Pages/HomePage";
 import { AdminPage } from "./Pages/AdminPage";
 import { WorkoutPage } from "./Pages/WorkoutPage";
+import { LoginPage } from "./Pages/LoginPage";
+import { RegistrationPage } from "./Pages/RegistrationPage";
 
 type Route = {
   path: string;
@@ -23,6 +25,14 @@ function App() {
     {
       path: "/workout",
       element: <WorkoutPage />,
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
+    {
+      path: "/register",
+      element: <RegistrationPage />
     },
   ];
 

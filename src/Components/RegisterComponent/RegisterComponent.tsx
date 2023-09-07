@@ -1,22 +1,24 @@
-import { FormEvent, useState } from 'react'
-import { InputEvent, FormState, SelectEvent, ButtonEvent } from '../../../Types/Form.js';
-import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
+import { FormEvent, useState, useEffect } from 'react'
+import { InputEvent, SelectEvent } from '../../../Types/Form.js';
 import authService from '../../service/authService.js';
 import './RegisterComponent.css';
+import { RegUser } from '../../../Types/User.js';
+import { useNavigate } from 'react-router-dom';
 
 
-type FormStateProps = {
-  formState: FormState;
-  setFormState: (formState: FormState) => void;
-}
+export default function RegisterComponent():JSX.Element {
 
-export default function RegisterComponent(props: FormStateProps):JSX.Element {
+  const navigate = useNavigate();
   
+  const [regUser, setRegUser] = useState({} as RegUser);
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
   const [confirmedPw, setConfirmedPw] = useState('');
 
-  const { regUser } = useSetUserInfo(props.formState, ref, value);
+  useEffect(() => {
+    setRegUser({...regUser, [ref]: value});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ref, value])
 
   function handleRegInfo(event: InputEvent | SelectEvent) {
     setRef(event.target.name); 
@@ -27,17 +29,12 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
     setConfirmedPw(event.target.value);
   }
 
-  function changeFormState(event: ButtonEvent) {
-    event.preventDefault();
-    props.setFormState("LOGIN");
-  }
-
   async function submitRegForm(event: FormEvent) {
     event.preventDefault();
     if(regUser.password === confirmedPw) {
       const result = await authService.registration(regUser);
       if(result.status === 201) {
-        props.setFormState("LOGIN");
+        navigate("/login")
       }else {
         throw new Error(`Status: ${result.status}, Msg: ${result.data.msg}`);
       }
@@ -87,7 +84,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
       </form>
       <aside className='login-option'>
         <p>Already a member?</p>
-        <button className='change-formstate-btn' onClick={changeFormState}>Sign in</button>
+        <button className='change-formstate-btn' onClick={(() => navigate("/login"))}>Sign in</button>
         <p>here!</p>
       </aside> 
     </section>
