@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { InputEvent, FormState, SelectEvent, ButtonEvent } from '../../../Types/Form.js';
-import { useSetUserInfo } from '../../hooks/userHook.js';
+import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
 import authService from '../../service/authService.js';
 
 import './RegisterComponent.css';

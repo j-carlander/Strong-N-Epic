@@ -1,24 +1,23 @@
 import { FormEvent, useState } from 'react'
 import { FormState, InputEvent, ButtonEvent } from '../../../Types/Form';
-import { useSetUserInfo } from '../../hooks/userHook.js';
+import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
 import authService from '../../service/authService.js';
 import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
 
-
-type FormStateProps = {
+type Props = {
   formState: FormState;
   setFormState: (formState: FormState) => void;
+  setLoggedIn: (setLoggedIn: boolean) => void;
 }
 
-
-export default function LoginComponent(props: FormStateProps):JSX.Element {
+export default function LoginComponent({formState, setFormState, setLoggedIn}: Props):JSX.Element {
 
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
   const navigate = useNavigate()
 
-  const { loginUser } = useSetUserInfo(props.formState, ref, value);
+  const { loginUser } = useSetUserInfo(formState, ref, value);
 
   function handleLoginInfo(event: InputEvent) {
     setRef(event.target.name); 
@@ -27,7 +26,7 @@ export default function LoginComponent(props: FormStateProps):JSX.Element {
 
   function changeFormState(event: ButtonEvent) {
     event.preventDefault();
-    props.setFormState("REGISTER");
+    setFormState("REGISTER");
   }
 
   function logout(event: ButtonEvent) {
@@ -43,8 +42,10 @@ export default function LoginComponent(props: FormStateProps):JSX.Element {
     const userInfo = memoryService.getSessionValue("USER_INFO");
     
     if(userInfo.username && userInfo.role === "USER"){
+      setLoggedIn(true);
       navigate("/workout");
     }else if(userInfo.username && userInfo.role === "ADMIN") {
+      setLoggedIn(true);
       navigate("/admin");
     }else {
       memoryService.removeSessionValue("JWT_TOKEN");

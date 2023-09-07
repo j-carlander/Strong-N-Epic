@@ -1,10 +1,17 @@
-import { useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Location, NavLink, useLocation } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
+import { useCurrentUser } from "../../hooks/currentUserHook";
 
-export function PageHeader(): JSX.Element {
+type Props = {
+  loggedIn: boolean;
+}
+
+export function PageHeader({loggedIn}: Props): JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const {currentUser} = useCurrentUser(loggedIn);
 
   const currentLocation: Location = useLocation();
   return (
@@ -39,7 +46,7 @@ export function PageHeader(): JSX.Element {
             </nav>
           </dialog>
           <div className={styles["current-user-options"]}>
-            <p>Currently logged in as </p>
+            <p>Currently logged in as {currentUser} </p>
             <button className={styles["sign-out-btn"]}>
               <i className="fa fa-sign-out"></i>
             </button>
