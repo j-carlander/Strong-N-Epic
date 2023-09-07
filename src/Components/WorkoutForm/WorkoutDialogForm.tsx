@@ -44,7 +44,7 @@ export function WorkoutDialogForm(): JSX.Element {
       headers: headersList,
       body: bodyContent,
     };
-    console.log(bodyContent);
+
     const result = await fetch(url, options);
     if (result.status === 201) {
       dialogRef.current?.close();
