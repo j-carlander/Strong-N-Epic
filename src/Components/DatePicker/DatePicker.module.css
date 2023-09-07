@@ -1,10 +1,12 @@
 .datepicker-container {
-  width: fit-content;
+  width: 100vw;
+  padding: 0 1em;
 }
 
 .day-btn-container {
   display: flex;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-evenly;
   margin-block: 0.2em;
 }
 

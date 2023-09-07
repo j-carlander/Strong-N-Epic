@@ -1,5 +1,6 @@
 .day-btn {
   padding: 0;
+  min-width: 13% 35px;
   margin-inline: 0.2em;
   cursor: pointer;
 }

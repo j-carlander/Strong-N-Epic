@@ -7,6 +7,7 @@
 .workoutsComponent {
   padding: 0.5em 0.8em;
   margin: 1em auto;
+  width: 95%;
   background: linear-gradient(
     70deg,
     rgba(217, 217, 217, 1) 0%,
