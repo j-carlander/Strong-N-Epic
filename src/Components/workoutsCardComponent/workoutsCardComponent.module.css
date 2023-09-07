@@ -10,13 +10,14 @@
   width: 95%;
   background: linear-gradient(
     70deg,
-    rgba(217, 217, 217, 1) 0%,
-    rgba(170, 170, 170, 1) 100%
+    rgb(255, 255, 255) 0%,
+    rgb(160, 160, 160) 100%
   );
   border: 1px solid #666;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
+  color: #000;
 }
 
 .workoutsComponentHeader {
