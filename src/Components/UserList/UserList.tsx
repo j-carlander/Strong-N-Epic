@@ -15,7 +15,7 @@ export function UserList(): JSX.Element {
   return (
     <>
       {users.map((user) => (
-        <UserItem user={user} key={(user.username)} />
+        <UserItem user={user} key={user.username} />
       ))}
     </>
   );

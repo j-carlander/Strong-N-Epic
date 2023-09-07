@@ -3,7 +3,8 @@ import memoryService from "./memoryService";
 import { Workout } from "../../Types/Workout";
 
 const currentUser = memoryService.getSessionValue("USER_INFO") as User;
-const token = memoryService.getSessionValue("JWT_TOKEN");
+const token = memoryService.getSessionValue("JWT_TOKEN") as string;
+
 
 const url = "http://127.0.0.1:8000";
 
@@ -22,16 +23,17 @@ async function getWorkouts(): Promise<Workout[]> {
   if (result.status !== 200) throw new Error("No workouts found");
 
   return await result.json();
-}
+};
 
-interface PutWorkoutProps {
-  id: string;
-}
-async function putWorkout({ id }: PutWorkoutProps): Promise<void> {
+
+async function putWorkout(
+  workoutId: string,
+  currentUser: User
+): Promise<Response> {
   const uri = url + "/api/workout";
 
   const bodyContent = JSON.stringify({
-    id: id,
+    id: workoutId,
     participant: currentUser.username,
   });
   const options = {
@@ -39,38 +41,20 @@ async function putWorkout({ id }: PutWorkoutProps): Promise<void> {
     headers: headersList,
     body: bodyContent,
   };
+  return await fetch(uri, options);
+};
 
-  const response = await fetch(uri, options);
-  if (response.status === 200) {
-    currentUser.bookedWorkouts.push(id);
-    memoryService.saveSessionValue("USER_INFO", currentUser);
-  }
-}
-
-async function postWorkout(
-  content: Workout,
-  dialogRef: React.RefObject<HTMLDialogElement>
-) {
+async function postWorkout(content: Workout): Promise<Response> {
   const url = "http://127.0.0.1:8000/api/workout";
-  const headersList = {
-    Authorization: "Bearer " + token,
-    "Content-Type": "application/json",
-  };
+
   const bodyContent = JSON.stringify({ ...content });
   const options = {
     method: "POST",
     headers: headersList,
     body: bodyContent,
   };
-
-  const result = await fetch(url, options);
-  if (result.status === 201) {
-    dialogRef.current?.close();
-    return result.json();
-  }
-  throw new Error("Wasn't able to POST a new workout");
-}
-
+  return await fetch(url, options);
+};
 
 async function getUsers() {
   const uri  = url + "/api/user";
@@ -84,6 +68,6 @@ async function getUsers() {
   const data = await result.json();
 
   return data;
-}
+};
 
 export default { getWorkouts, putWorkout, postWorkout, getUsers };

@@ -10,6 +10,7 @@ import {
 } from "../../../Types/Workout";
 import { SelectEvent, InputEvent } from "../../../Types/Form";
 import styles from "./WorkoutDialogForm.module.css";
+import fetchService from "../../service/fetchService";
 
 const emptyWorkout: Workout = {
   _id: null,
@@ -29,6 +30,13 @@ export function WorkoutDialogForm(): JSX.Element {
 
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault();
+
+    const result = await fetchService.postWorkout(newWorkout);
+    if (result.status === 201) {
+      dialogRef.current?.close();
+      setNewWorkout(emptyWorkout);
+    }
+    throw new Error("Wasn't able to POST a new workout");
   }
 
   return (
