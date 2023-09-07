@@ -3,21 +3,21 @@ import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import memoryService from "../../service/memoryService";
 import { User } from "../../../Types/User";
+import fetchService from "../../service/fetchService";
 
 interface workoutProps {
   workout: Workout;
+  currentUser: User;
 }
 
 export default function WorkoutsCardComponent({
   workout,
+  currentUser,
 }: workoutProps): JSX.Element {
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
     formattedStartTime.getTime() + workout.durationInMin * 60000
   );
-
-  const currentUser = memoryService.getSessionValue("USER_INFO") as User;
-  const token = memoryService.getSessionValue("JWT_TOKEN");
 
   let isDisabled: boolean;
 
@@ -31,25 +31,10 @@ export default function WorkoutsCardComponent({
 
   if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
 
-  async function attendExercise(): Promise<void> {
+  async function bookExercise(): Promise<void> {
     if (!workout._id || !currentUser) return;
 
-    const url = "http://127.0.0.1:8000/api/workout";
-    const headersList = {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-    };
-    const bodyContent = JSON.stringify({
-      id: workout._id,
-      participant: currentUser.username,
-    });
-    const options = {
-      method: "PUT",
-      headers: headersList,
-      body: bodyContent,
-    };
-
-    const response = await fetch(url, options);
+    const response = await fetchService.putWorkout(workout._id, currentUser);
     if (response.status === 200) {
       currentUser.bookedWorkouts.push(workout._id);
       memoryService.saveSessionValue("USER_INFO", currentUser);
@@ -89,7 +74,7 @@ export default function WorkoutsCardComponent({
         {!isBooked ? (
           <button
             className={styles.workoutsComponentButton}
-            onClick={attendExercise}
+            onClick={bookExercise}
             disabled={isDisabled}>
             Book
           </button>
