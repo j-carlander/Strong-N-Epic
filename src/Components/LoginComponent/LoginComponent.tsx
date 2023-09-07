@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { FormState, InputEvent, ButtonEvent } from '../../../Types/Form';
-import { useSetInputValues } from '../../hooks/handleFormHook.js';
+import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
 import authService from '../../service/authService.js';
 import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function LoginComponent({formState, setFormState, setLoggedIn}: P
   const [ref, setRef] = useState('');
   const navigate = useNavigate()
 
-  const { loginUser } = useSetInputValues(formState, ref, value);
+  const { loginUser } = useSetUserInfo(formState, ref, value);
 
   function handleLoginInfo(event: InputEvent) {
     setRef(event.target.name); 

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { InputEvent, FormState, SelectEvent, ButtonEvent } from '../../../Types/Form.js';
-import { useSetInputValues } from '../../hooks/handleFormHook.js';
+import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
 import authService from '../../service/authService.js';
 
 import './RegisterComponent.css';
@@ -17,7 +17,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
   const [ref, setRef] = useState('');
   const [confirmedPw, setConfirmedPw] = useState('');
 
-  const { regUser } = useSetInputValues(props.formState, ref, value);
+  const { regUser } = useSetUserInfo(props.formState, ref, value);
 
   function handleRegInfo(event: InputEvent | SelectEvent) {
     setRef(event.target.name); 
