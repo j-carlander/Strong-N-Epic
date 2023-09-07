@@ -1,28 +1,31 @@
 .day-btn {
   padding: 0;
+  min-width: max(13%, 35px);
+  aspect-ratio: 1 / 1;
   margin-inline: 0.2em;
   cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.day-btn * {
+  margin: 0;
+  padding: 0;
 }
 
 .day-btn:nth-child(4) {
   border: 3px solid #5c8374;
 }
 
-.day-container {
-  display: flex;
-  flex-direction: column;
-  padding: 0.1em;
-}
-
 .date {
+  text-align: left;
+  margin: .1rem;
   font-size: smaller;
-  margin: 0;
-  align-self: flex-start;
 }
 
 .day {
-  margin: 0.3em 0.7em;
-  font-size: 1.2rem;
+  font-size: min(4vw, 1.5em);
 }
 
 .week-btn {

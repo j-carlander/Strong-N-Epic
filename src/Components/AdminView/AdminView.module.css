@@ -20,6 +20,8 @@
 }
 
 .change-view-btn {
+  border-radius: 0;
+  margin: 0;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   border-color: transparent;
