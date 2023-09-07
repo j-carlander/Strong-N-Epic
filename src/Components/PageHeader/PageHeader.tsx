@@ -13,15 +13,11 @@ export function PageHeader(): JSX.Element {
 
   const currentUser = memoryService.getSessionValue("USER_INFO") as User;
 
-  console.log(currentUser);
-
   function logOut() {
     memoryService.removeSessionValue("JWT_TOKEN");
     memoryService.removeSessionValue("USER_INFO");
     navigate("/login");
   }
-
-  // currentUser.role === "ADMIN" ? styles["sign-out-admin-btn"] : styles["sign-out-user-btn"] 
 
   const currentLocation: Location = useLocation();
   return (

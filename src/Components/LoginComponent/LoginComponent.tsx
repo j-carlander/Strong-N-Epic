@@ -4,13 +4,13 @@ import authService from '../../service/authService.js';
 import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
 import './LoginComponent.css';
-import { LoginUser } from '../../../Types/User.js';
+import { User } from '../../../Types/User.js';
 
 export default function LoginComponent():JSX.Element {
 
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
-  const [loginUser, setLoginUser] = useState({} as LoginUser);
+  const [loginUser, setLoginUser] = useState({} as User);
   const navigate = useNavigate()
 
   useEffect(() => {
