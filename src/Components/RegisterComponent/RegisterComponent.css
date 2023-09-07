@@ -11,3 +11,19 @@
 .option-one:empty {
   display: none;
 }
+
+.firstname-field,
+.lastname-field,
+.age-field,
+.gender-field,
+.email-field,
+.phone-field,
+.repassword-field {
+  padding: 0.25em 0 0.25em 0;
+}
+
+.login-option {
+display: flex;
+  gap: 0.5em;
+  margin-top: 7em;
+}

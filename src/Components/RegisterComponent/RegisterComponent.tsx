@@ -2,7 +2,6 @@ import { FormEvent, useState } from 'react'
 import { InputEvent, FormState, SelectEvent, ButtonEvent } from '../../../Types/Form.js';
 import { useSetUserInfo } from '../../hooks/setUserInfoHook.js';
 import authService from '../../service/authService.js';
-
 import './RegisterComponent.css';
 
 
@@ -86,7 +85,7 @@ export default function RegisterComponent(props: FormStateProps):JSX.Element {
 
         <button className='login-btn'>Sign up</button>
       </form>
-      <aside>
+      <aside className='login-option'>
         <p>Already a member?</p>
         <button className='change-formstate-btn' onClick={changeFormState}>Sign in</button>
         <p>here!</p>

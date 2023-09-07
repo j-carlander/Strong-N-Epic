@@ -5,22 +5,16 @@ import RegisterComponent from "../Components/RegisterComponent/RegisterComponent
 import { FormState } from "../../Types/Form.js";
 import { PageHeader } from "../Components/PageHeader/PageHeader.js";
 
-type Props = {
-  loggedIn: boolean;
-  setLoggedIn: (setLoggedIn: boolean) => void;
-}
-
-export function HomePage({loggedIn, setLoggedIn}: Props): JSX.Element {
+export function HomePage(): JSX.Element {
   const [formState, setFormState] = useState("LOGIN" as FormState);
 
   return (
     <>
-      <PageHeader loggedIn={loggedIn} />
+      <PageHeader />
       {formState === "LOGIN" && (
         <LoginComponent 
           formState={formState}
           setFormState={setFormState}
-          setLoggedIn={setLoggedIn}
         />
       )}
 

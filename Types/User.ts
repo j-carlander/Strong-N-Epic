@@ -17,7 +17,7 @@ export interface LoginUser {
 export interface RegUser {
   firstname: string;
   lastname: string;
-  gender: gender;
+  gender: Gender;
   age: number;
   email: string;
   phone: number | string;

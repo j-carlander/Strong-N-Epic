@@ -1,17 +1,22 @@
-import { memo, useEffect, useRef, useState } from "react";
-import { Location, NavLink, useLocation } from "react-router-dom";
+import { useRef } from "react";
+import { Location, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
-import { useCurrentUser } from "../../hooks/currentUserHook";
+import memoryService from "../../service/memoryService";
 
-type Props = {
-  loggedIn: boolean;
-}
 
-export function PageHeader({loggedIn}: Props): JSX.Element {
+export function PageHeader(): JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const {currentUser} = useCurrentUser(loggedIn);
+  const navigate = useNavigate();
+
+  const currentUser = memoryService.getSessionValue("USER_INFO");
+
+  function logOut() {
+    memoryService.removeSessionValue("JWT_TOKEN");
+    memoryService.removeSessionValue("USER_INFO");
+    navigate("/");
+  }
 
   const currentLocation: Location = useLocation();
   return (
@@ -46,8 +51,8 @@ export function PageHeader({loggedIn}: Props): JSX.Element {
             </nav>
           </dialog>
           <div className={styles["current-user-options"]}>
-            <p>Currently logged in as {currentUser} </p>
-            <button className={styles["sign-out-btn"]}>
+            <p>Currently logged in as {currentUser.username} </p>
+            <button className={styles["sign-out-btn"]} onClick={logOut}>
               <i className="fa fa-sign-out"></i>
             </button>
           </div>

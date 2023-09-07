@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import { HomePage } from "./Pages/HomePage";
@@ -12,20 +11,18 @@ type Route = {
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
-
   const routes: Route[] = [
     {
       path: "/",
-      element: <HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />,
+      element: <HomePage />,
     },
     {
       path: "/admin",
-      element: <AdminPage loggedIn={loggedIn}/>,
+      element: <AdminPage />,
     },
     {
       path: "/workout",
-      element: <WorkoutPage loggedIn={loggedIn}/>,
+      element: <WorkoutPage />,
     },
   ];
 

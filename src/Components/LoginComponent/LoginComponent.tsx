@@ -9,10 +9,9 @@ import './LoginComponent.css';
 type Props = {
   formState: FormState;
   setFormState: (formState: FormState) => void;
-  setLoggedIn: (setLoggedIn: boolean) => void;
 }
 
-export default function LoginComponent({formState, setFormState, setLoggedIn}: Props):JSX.Element {
+export default function LoginComponent({formState, setFormState}: Props):JSX.Element {
 
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
@@ -37,10 +36,8 @@ export default function LoginComponent({formState, setFormState, setLoggedIn}: P
     const userInfo = memoryService.getSessionValue("USER_INFO");
     
     if(userInfo.username && userInfo.role === "USER"){
-      setLoggedIn(true);
       navigate("/workout");
     }else if(userInfo.username && userInfo.role === "ADMIN") {
-      setLoggedIn(true);
       navigate("/admin");
     }else {
       memoryService.removeSessionValue("JWT_TOKEN");
@@ -56,7 +53,7 @@ export default function LoginComponent({formState, setFormState, setLoggedIn}: P
         <input required autoFocus className='username-field' onChange={handleLoginInfo} type='text' name='username' value={loginUser.username || ''} id="usernameField"></input>
         <label className='password-label' htmlFor="passwordField">Password:</label>
         <input required className='password-field' onChange={handleLoginInfo} type='password' name='password' value={loginUser.password || ''} id="passwordField"></input>
-        <button className='login-btn'>Login</button>
+        <button className='login-btn'>Log In</button>
       </form>
       <aside className='register-option'>
         <p>Not a member?</p>
