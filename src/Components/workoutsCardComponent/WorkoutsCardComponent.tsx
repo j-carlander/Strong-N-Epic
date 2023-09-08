@@ -3,7 +3,6 @@ import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import { User } from "../../../Types/User";
 import { PatchAction } from "../../service/fetchService";
-import { useAuthContext, useUserContext } from "../../Context/useContext";
 
 interface workoutProps {
   workout: Workout;
@@ -17,7 +16,6 @@ export default function WorkoutsCardComponent({
   currentUser,
   handleWorkout,
 }: workoutProps): JSX.Element {
-
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
     formattedStartTime.getTime() + workout.durationInMin * 60000
@@ -61,28 +59,32 @@ export default function WorkoutsCardComponent({
         </p>
       </div>
       {currentUser.role === "USER" ? (
-      <div className={styles.container}>
-        {!isBooked ? (
-          <button
-            className={styles.workoutsComponentButton}
-            onClick={() => handleWorkout(workout, "BOOK")}
-            disabled={isDisabled}>
-            Book
-          </button>
-        ) : (
-          <button
-            className={styles.workoutsComponentButtonCancel}
-            onClick={() => handleWorkout(workout, "CANCEL")}
-            disabled={isDisabled}>
-            Cancel
-          </button>
-        )}
-        <p className={styles.workoutsComponentCity}>&#x1F588;{workout.city}</p>
-      </div>
+        <div className={styles.container}>
+          {!isBooked ? (
+            <button
+              className={styles.workoutsComponentButton}
+              onClick={() => handleWorkout(workout, "BOOK")}
+              disabled={isDisabled}>
+              Book
+            </button>
+          ) : (
+            <button
+              className={styles.workoutsComponentButtonCancel}
+              onClick={() => handleWorkout(workout, "CANCEL")}
+              disabled={isDisabled}>
+              Cancel
+            </button>
+          )}
+          <p className={styles.workoutsComponentCity}>
+            &#x1F588;{workout.city}
+          </p>
+        </div>
       ) : (
         <details className={styles.details}>
           <summary>Participants</summary>
-          {workout.participants.map((participant) => <p key={workout._id}>{participant}</p>)}
+          {workout.participants.map((participant) => (
+            <p key={workout._id}>{participant}</p>
+          ))}
         </details>
       )}
     </article>
