@@ -3,6 +3,10 @@ import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import { User } from "../../../Types/User";
 import { PatchAction } from "../../service/fetchService";
+import memoryService from "../../service/memoryService";
+import fetchService from "../../service/fetchService";
+import { useEffect, useState } from "react";
+
 
 interface workoutProps {
   workout: Workout;
@@ -16,6 +20,9 @@ export default function WorkoutsCardComponent({
   currentUser,
   handleWorkout,
 }: workoutProps): JSX.Element {
+
+  const [users, setUsers] = useState([] as User[]);
+
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
     formattedStartTime.getTime() + workout.durationInMin * 60000
@@ -58,6 +65,7 @@ export default function WorkoutsCardComponent({
           available (of {workout.maxAllowedParticipants})
         </p>
       </div>
+      {currentUser.role !== "ADMIN" ? (
       <div className={styles.container}>
         {!isBooked ? (
           <button
@@ -76,6 +84,12 @@ export default function WorkoutsCardComponent({
         )}
         <p className={styles.workoutsComponentCity}>&#x1F588;{workout.city}</p>
       </div>
+      ) : (
+        <details className={styles.details}>
+          <summary>Participants</summary>
+          {workout.participants.map((participant) => <p key={workout._id}>{participant}</p>)}
+        </details>
+      )}
     </article>
   );
 }

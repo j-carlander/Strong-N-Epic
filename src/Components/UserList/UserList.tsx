@@ -8,7 +8,7 @@ export function UserList(): JSX.Element {
   const [users, setUsers] = useState([] as User[]);
 
   useEffect(() => {
-    fetchService.getUsers().then((data) => {console.log(data); setUsers(data);});
+    fetchService.getUsers().then((data) => setUsers(data));
   }, [])
   
 
