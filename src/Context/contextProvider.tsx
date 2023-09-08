@@ -1,12 +1,15 @@
 import { createContext, ReactNode, useState } from 'react';
+import memoryService from '../service/memoryService';
+
+const userDetails = memoryService.getSessionValue("USER_INFO") || {
+  jwt: '',
+  role: '',
+  username: '',
+  bookedWorkouts: [],
+};
 
 type Props = {
   children?:ReactNode;
-}
-
-type AuthContext = {
-  authenticated: boolean;
-  setAuthenticated: (authentiocated: boolean) => void;
 }
 
 type UserDetails = {
@@ -21,38 +24,23 @@ type UserContext = {
   setDetails: (details: UserDetails) => void;
 }
 
-const initialAuthValue = {
-  authenticated: false,
-  setAuthenticated: () => {},
-}
-
 const initialUserValue = {
-  details: {
-    jwt: '',
-    role: '',
-    username: '',
-    bookedWorkouts: [],
-  },
+  details: userDetails,
   setDetails: () => {},
 }
 
-
-const AuthContext = createContext<AuthContext>(initialAuthValue);
 const UserContext = createContext<UserContext>(initialUserValue)
 
 
 const ContextProvider = ({children}: Props) => {
   
-  const [authenticated, setAuthenticated] = useState<boolean>(initialAuthValue.authenticated);
   const [details, setDetails] = useState<UserDetails>(initialUserValue.details)
 
   return (
-    <AuthContext.Provider value={{authenticated, setAuthenticated}}>
       <UserContext.Provider value={{details, setDetails}}>
         {children}
       </UserContext.Provider>
-    </AuthContext.Provider>
   )
 }
 
-export { AuthContext, UserContext, ContextProvider }
+export { UserContext, ContextProvider }

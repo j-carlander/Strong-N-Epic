@@ -1,22 +1,21 @@
 // import React from 'react'
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
-import { User } from "../../../Types/User";
 import { PatchAction } from "../../service/fetchService";
-import { useAuthContext, useUserContext } from "../../Context/useContext";
+import { useUserContext } from "../../Context/useContext";
 
 interface workoutProps {
   workout: Workout;
-  currentUser: User;
   handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
   // cancelWorkout: (workout: Workout) => Promise<void>;
 }
 
 export default function WorkoutsCardComponent({
   workout,
-  currentUser,
   handleWorkout,
 }: workoutProps): JSX.Element {
+
+  const currentUser = useUserContext();
 
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
@@ -33,7 +32,7 @@ export default function WorkoutsCardComponent({
 
   let isBooked: boolean = false;
 
-  if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
+  if (workout._id) isBooked = currentUser.details.bookedWorkouts.includes(workout._id);
 
   return (
     <article className={styles.workoutsComponent}>
@@ -60,7 +59,7 @@ export default function WorkoutsCardComponent({
           available (of {workout.maxAllowedParticipants})
         </p>
       </div>
-      {currentUser.role === "USER" ? (
+      {currentUser.details.role === "USER" ? (
       <div className={styles.container}>
         {!isBooked ? (
           <button
