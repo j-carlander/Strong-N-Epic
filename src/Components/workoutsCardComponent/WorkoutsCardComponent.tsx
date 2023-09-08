@@ -1,18 +1,20 @@
 // import React from 'react'
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
-import memoryService from "../../service/memoryService";
 import { User } from "../../../Types/User";
-import fetchService from "../../service/fetchService";
+import { PatchAction } from "../../service/fetchService";
 
 interface workoutProps {
   workout: Workout;
   currentUser: User;
+  handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
+  // cancelWorkout: (workout: Workout) => Promise<void>;
 }
 
 export default function WorkoutsCardComponent({
   workout,
   currentUser,
+  handleWorkout,
 }: workoutProps): JSX.Element {
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
@@ -30,20 +32,6 @@ export default function WorkoutsCardComponent({
   let isBooked: boolean = false;
 
   if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
-
-  async function bookExercise(): Promise<void> {
-    if (!workout._id || !currentUser) return;
-
-    const response = await fetchService.putWorkout(workout._id, currentUser);
-    if (response.status === 200) {
-      currentUser.bookedWorkouts.push(workout._id);
-      memoryService.saveSessionValue("USER_INFO", currentUser);
-    }
-  }
-
-  function cancelExercise() {
-    console.log("Hej då");
-  }
 
   return (
     <article className={styles.workoutsComponent}>
@@ -74,14 +62,14 @@ export default function WorkoutsCardComponent({
         {!isBooked ? (
           <button
             className={styles.workoutsComponentButton}
-            onClick={bookExercise}
+            onClick={() => handleWorkout(workout, "BOOK")}
             disabled={isDisabled}>
             Book
           </button>
         ) : (
           <button
             className={styles.workoutsComponentButtonCancel}
-            onClick={cancelExercise}
+            onClick={() => handleWorkout(workout, "CANCEL")}
             disabled={isDisabled}>
             Cancel
           </button>
