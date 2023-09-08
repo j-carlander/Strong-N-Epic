@@ -65,3 +65,17 @@ dialog ul {
   margin-left: 10em;
   cursor: pointer;
 } */
+
+.logRegContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.logRegContainer * {
+  width: 40%;
+}
+
+.logRegBtn {
+  width: 100%;
+}

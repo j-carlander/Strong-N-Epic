@@ -1,5 +1,6 @@
-export type WorkoutType = "Spinning" | "Aerobics" | "Gympa" | "Dans" | "Yoga";
-export type City = "Norrtälje" | "Åkersberga";
+export type WorkoutType = "Spinning" | "Aerobics" | "Gympa" | "Dans" | "Yoga" | "Boxning";
+export type City = "Norrtälje" | "Åkersberga" | "Stockholm" | "Vallentuna";
+
 export type Recurring = "just_once" | "every_week" | "every_other_week";
 
 export interface Workout {
@@ -23,9 +24,10 @@ export const workoutTypes: WorkoutType[] = [
   "Gympa",
   "Dans",
   "Yoga",
+  "Boxning"
 ];
 
-export const cities: City[] = ["Norrtälje", "Åkersberga"];
+export const cities: City[] = ["Norrtälje", "Åkersberga", "Stockholm", "Vallentuna"];
 
 export const recurring: Recurring[] = [
   "just_once",
