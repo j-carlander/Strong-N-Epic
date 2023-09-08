@@ -3,24 +3,18 @@ import { Location, NavLink, useLocation } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
 import memoryService from "../../service/memoryService";
+import { useUserContext } from "../../Context/useContext";
 
 
 export function PageHeader(): JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const navigate = useNavigate();
-
-  const currentUser = memoryService.getSessionValue("USER_INFO");
-
-  console.log(currentUser);
+  const currentUser = useUserContext();
 
   function logOut() {
-    memoryService.removeSessionValue("JWT_TOKEN");
     memoryService.removeSessionValue("USER_INFO");
-    navigate("/login");
+    currentUser.setDetails({jwt: '', role: '', username: '', bookedWorkouts: []});
   }
-
-  // currentUser.role === "ADMIN" ? styles["sign-out-admin-btn"] : styles["sign-out-user-btn"] 
 
   const currentLocation: Location = useLocation();
   return (
@@ -28,7 +22,7 @@ export function PageHeader(): JSX.Element {
       <h1 className={styles["page-title"]}>Strong'N'Epic</h1>
       {currentLocation.pathname !== "/" && currentLocation.pathname !== "/login" && currentLocation.pathname !== "/register" && (
         <div className={styles["top-bar"]}>
-          {currentUser.role === "ADMIN" && (
+          {currentUser.details.role === "ADMIN" && (
             <div>
               <button
                 className={styles["open-menu-btn"]}
@@ -58,8 +52,8 @@ export function PageHeader(): JSX.Element {
               </dialog>
             </div>
           )}
-          <div className={currentUser.role === "ADMIN" ? styles["current-user-admin-options"] : styles["current-user-user-options"]}>
-            <p className="currently-logged-in">Currently logged in as {currentUser.username} </p>
+          <div className={currentUser.details.role === "ADMIN" ? styles["current-user-admin-options"] : styles["current-user-user-options"]}>
+            <p className="currently-logged-in">Currently logged in as {currentUser.details.username} </p>
             <button className={styles["sign-out-btn"]} onClick={logOut}>
               <i className="fa fa-sign-out"></i>
             </button>

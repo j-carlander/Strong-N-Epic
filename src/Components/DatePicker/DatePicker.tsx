@@ -1,10 +1,18 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { InputEvent } from "../../../Types/Form";
 import { DayBtn, NextWeekBtn, PrevWeekBtn } from "../DayBtn/DayBtns";
 import styles from "./DatePicker.module.css";
 
-export function DatePicker(): JSX.Element {
-  const [chosenDate, setChosenDate] = useState<Date>(new Date()); // TODO: need to be a prop to work as a filter
+interface DatePickerProps {
+  chosenDate: Date;
+  setChosenDate: (d: Date) => void;
+}
+
+export function DatePicker({
+  chosenDate,
+  setChosenDate,
+}: DatePickerProps): JSX.Element {
+  // const [chosenDate, setChosenDate] = useState<Date>(new Date()); // TODO: need to be a prop to work as a filter
 
   function theOtherDay(date: Date, offsetDays: number): Date {
     const time: number = date.getTime();

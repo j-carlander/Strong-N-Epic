@@ -3,17 +3,6 @@ export type UserRole = "USER" | "ADMIN";
 export type Gender = "I prefer not to say" | "Male" | "Female" | "Other";
 
 export interface User {
-  bookedWorkouts: string[];
-  username: string;
-  role: UserRole;
-}
-
-export interface LoginUser {
-  username: string;
-  password: string;
-}
-
-export interface RegUser {
   firstname: string;
   lastname: string;
   gender: Gender;
@@ -22,4 +11,6 @@ export interface RegUser {
   phone: number | string;
   username: string;
   password: string;
+  role: UserRole;
+  bookedWorkouts: string[];
 }

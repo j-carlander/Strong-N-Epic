@@ -1,23 +1,32 @@
 // import React from 'react'
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
-import memoryService from "../../service/memoryService";
-import { User } from "../../../Types/User";
+import { PatchAction } from "../../service/fetchService";
+import { useUserContext } from "../../Context/useContext";
+// import memoryService from "../../service/memoryService";
+// import fetchService from "../../service/fetchService";
+// import { useEffect, useState } from "react";
+
 
 interface workoutProps {
   workout: Workout;
+  handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
+  // cancelWorkout: (workout: Workout) => Promise<void>;
 }
 
 export default function WorkoutsCardComponent({
   workout,
+  handleWorkout,
 }: workoutProps): JSX.Element {
+
+
+  const currentUser = useUserContext();
+  // const [users, setUsers] = useState([] as User[]);
+
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
     formattedStartTime.getTime() + workout.durationInMin * 60000
   );
-
-  const currentUser = memoryService.getSessionValue("USER_INFO") as User;
-  const token = memoryService.getSessionValue("JWT_TOKEN");
 
   let isDisabled: boolean;
 
@@ -29,36 +38,7 @@ export default function WorkoutsCardComponent({
 
   let isBooked: boolean = false;
 
-  if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
-
-  async function attendExercise(): Promise<void> {
-    if (!workout._id || !currentUser) return;
-
-    const url = "http://127.0.0.1:8000/api/workout";
-    const headersList = {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-    };
-    const bodyContent = JSON.stringify({
-      id: workout._id,
-      participant: currentUser.username,
-    });
-    const options = {
-      method: "PUT",
-      headers: headersList,
-      body: bodyContent,
-    };
-
-    const response = await fetch(url, options);
-    if (response.status === 200) {
-      currentUser.bookedWorkouts.push(workout._id);
-      memoryService.saveSessionValue("USER_INFO", currentUser);
-    }
-  }
-
-  function cancelExercise() {
-    console.log("Hej då");
-  }
+  if (workout._id) isBooked = currentUser.details.bookedWorkouts.includes(workout._id);
 
   return (
     <article className={styles.workoutsComponent}>
@@ -85,24 +65,33 @@ export default function WorkoutsCardComponent({
           available (of {workout.maxAllowedParticipants})
         </p>
       </div>
+      {currentUser.details.role === "USER" ? (
       <div className={styles.container}>
         {!isBooked ? (
           <button
             className={styles.workoutsComponentButton}
-            onClick={attendExercise}
+            onClick={() => handleWorkout(workout, "BOOK")}
             disabled={isDisabled}>
             Book
           </button>
         ) : (
           <button
             className={styles.workoutsComponentButtonCancel}
-            onClick={cancelExercise}
+            onClick={() => handleWorkout(workout, "CANCEL")}
             disabled={isDisabled}>
             Cancel
           </button>
         )}
         <p className={styles.workoutsComponentCity}>&#x1F588;{workout.city}</p>
       </div>
+      ) : (
+        <details className={styles.details}>
+          <summary>Participants</summary>
+          {workout.participants.map((participant) => (
+            <p key={workout._id}>{participant}</p>
+          ))}
+        </details>
+      )}
     </article>
   );
 }
