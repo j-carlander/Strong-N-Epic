@@ -9,7 +9,7 @@ const url = "http://127.0.0.1:8000";
 const headersList = {
   Authorization: "Bearer " + token,
   "Content-Type": "application/json",
-};
+}
 
 async function getWorkouts(): Promise<Workout[]> {
   const uri = url + "/api/workout";
