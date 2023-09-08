@@ -49,7 +49,7 @@ export function WorkoutsList({ filter }: WorkoutListProps): JSX.Element {
           .filter((workout) =>
             currentUser.role === "ADMIN"
               ? workout
-              : filter.date.getDate() === new Date(workout.startTime).getDate()
+              : filter.date?.getDate() === new Date(workout.startTime).getDate()
           )
           .map((workout) => (
             <WorkoutsCardComponent

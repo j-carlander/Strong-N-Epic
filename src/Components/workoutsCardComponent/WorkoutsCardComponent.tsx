@@ -3,10 +3,9 @@ import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import { User } from "../../../Types/User";
 import { PatchAction } from "../../service/fetchService";
-import memoryService from "../../service/memoryService";
-import fetchService from "../../service/fetchService";
-import { useEffect, useState } from "react";
-
+// import memoryService from "../../service/memoryService";
+// import fetchService from "../../service/fetchService";
+// import { useEffect, useState } from "react";
 
 interface workoutProps {
   workout: Workout;
@@ -20,8 +19,7 @@ export default function WorkoutsCardComponent({
   currentUser,
   handleWorkout,
 }: workoutProps): JSX.Element {
-
-  const [users, setUsers] = useState([] as User[]);
+  // const [users, setUsers] = useState([] as User[]);
 
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
@@ -66,28 +64,32 @@ export default function WorkoutsCardComponent({
         </p>
       </div>
       {currentUser.role !== "ADMIN" ? (
-      <div className={styles.container}>
-        {!isBooked ? (
-          <button
-            className={styles.workoutsComponentButton}
-            onClick={() => handleWorkout(workout, "BOOK")}
-            disabled={isDisabled}>
-            Book
-          </button>
-        ) : (
-          <button
-            className={styles.workoutsComponentButtonCancel}
-            onClick={() => handleWorkout(workout, "CANCEL")}
-            disabled={isDisabled}>
-            Cancel
-          </button>
-        )}
-        <p className={styles.workoutsComponentCity}>&#x1F588;{workout.city}</p>
-      </div>
+        <div className={styles.container}>
+          {!isBooked ? (
+            <button
+              className={styles.workoutsComponentButton}
+              onClick={() => handleWorkout(workout, "BOOK")}
+              disabled={isDisabled}>
+              Book
+            </button>
+          ) : (
+            <button
+              className={styles.workoutsComponentButtonCancel}
+              onClick={() => handleWorkout(workout, "CANCEL")}
+              disabled={isDisabled}>
+              Cancel
+            </button>
+          )}
+          <p className={styles.workoutsComponentCity}>
+            &#x1F588;{workout.city}
+          </p>
+        </div>
       ) : (
         <details className={styles.details}>
           <summary>Participants</summary>
-          {workout.participants.map((participant) => <p key={workout._id}>{participant}</p>)}
+          {workout.participants.map((participant) => (
+            <p key={workout._id}>{participant}</p>
+          ))}
         </details>
       )}
     </article>
