@@ -8,7 +8,7 @@ export interface Workout {
   _id: string | null;
   workoutType: WorkoutType;
   city: City;
-  participants: User[];
+  participants: string[];
   startTime: Date;
   maxAllowedParticipants: number;
   recurring: Recurring;

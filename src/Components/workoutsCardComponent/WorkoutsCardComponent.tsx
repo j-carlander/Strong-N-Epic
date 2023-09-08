@@ -3,6 +3,7 @@ import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import { User } from "../../../Types/User";
 import { PatchAction } from "../../service/fetchService";
+import { useAuthContext, useUserContext } from "../../Context/useContext";
 
 interface workoutProps {
   workout: Workout;
