@@ -5,6 +5,7 @@ import { AdminPage } from "./Pages/AdminPage";
 import { WorkoutPage } from "./Pages/WorkoutPage";
 import { LoginPage } from "./Pages/LoginPage";
 import { RegistrationPage } from "./Pages/RegistrationPage";
+import { AuthProvider } from "./Context/AuthContext/authContext";
 
 type Route = {
   path: string;
@@ -38,7 +39,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={createBrowserRouter(routes)} />
+      <AuthProvider>
+        <RouterProvider router={createBrowserRouter(routes)} />
+      </AuthProvider>
     </>
   );
 }

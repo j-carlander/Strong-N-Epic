@@ -10,7 +10,6 @@ export function UserList(): JSX.Element {
   useEffect(() => {
     fetchService.getUsers().then((data) => setUsers(data));
   }, [])
-  
 
   return (
     <>
