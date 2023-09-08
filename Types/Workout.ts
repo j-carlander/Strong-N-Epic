@@ -15,6 +15,10 @@ export interface Workout {
   durationInMin: number;
 }
 
+export interface FilterOptions {
+  date: Date;
+}
+
 export const workoutTypes: WorkoutType[] = [
   "Spinning",
   "Aerobics",

@@ -4,7 +4,6 @@ import { Workout } from "../../Types/Workout";
 
 const token = memoryService.getSessionValue("JWT_TOKEN") as string;
 
-
 const url = "http://127.0.0.1:8000";
 
 const headersList = {
@@ -24,19 +23,21 @@ async function getWorkouts(): Promise<Workout[]> {
   return await result.json();
 }
 
+export type PatchAction = "BOOK" | "CANCEL";
 
-async function putWorkout(
+async function patchWorkout(
   workoutId: string,
-  currentUser: User
+  currentUser: User,
+  action: PatchAction
 ): Promise<Response> {
-  const uri = url + "/api/workout";
+  const uri = url + "/api/workout/" + action;
 
   const bodyContent = JSON.stringify({
     id: workoutId,
     participant: currentUser.username,
   });
   const options = {
-    method: "PUT",
+    method: "PATCH",
     headers: headersList,
     body: bodyContent,
   };
@@ -56,7 +57,7 @@ async function postWorkout(content: Workout): Promise<Response> {
 }
 
 async function getUsers() {
-  const uri  = url + "/api/user";
+  const uri = url + "/api/user";
 
   const options = {
     method: "GET",
@@ -69,4 +70,4 @@ async function getUsers() {
   return data;
 }
 
-export default { getWorkouts, putWorkout, postWorkout, getUsers };
+export default { getWorkouts, patchWorkout, postWorkout, getUsers };

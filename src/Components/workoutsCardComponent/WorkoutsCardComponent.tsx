@@ -1,19 +1,24 @@
 // import React from 'react'
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
+import { User } from "../../../Types/User";
+import { PatchAction } from "../../service/fetchService";
 import memoryService from "../../service/memoryService";
 import fetchService from "../../service/fetchService";
 import { useEffect, useState } from "react";
-import { User } from "../../../Types/User";
+
 
 interface workoutProps {
   workout: Workout;
   currentUser: User;
+  handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
+  // cancelWorkout: (workout: Workout) => Promise<void>;
 }
 
 export default function WorkoutsCardComponent({
   workout,
   currentUser,
+  handleWorkout,
 }: workoutProps): JSX.Element {
 
   const [users, setUsers] = useState([] as User[]);
@@ -34,20 +39,6 @@ export default function WorkoutsCardComponent({
   let isBooked: boolean = false;
 
   if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
-
-  async function bookExercise(): Promise<void> {
-    if (!workout._id || !currentUser) return;
-
-    const response = await fetchService.putWorkout(workout._id, currentUser);
-    if (response.status === 200) {
-      currentUser.bookedWorkouts.push(workout._id);
-      memoryService.saveSessionValue("USER_INFO", currentUser);
-    }
-  }
-
-  function cancelExercise() {
-    console.log("Hej då");
-  }
 
   return (
     <article className={styles.workoutsComponent}>
@@ -79,14 +70,14 @@ export default function WorkoutsCardComponent({
         {!isBooked ? (
           <button
             className={styles.workoutsComponentButton}
-            onClick={bookExercise}
+            onClick={() => handleWorkout(workout, "BOOK")}
             disabled={isDisabled}>
             Book
           </button>
         ) : (
           <button
             className={styles.workoutsComponentButtonCancel}
-            onClick={cancelExercise}
+            onClick={() => handleWorkout(workout, "CANCEL")}
             disabled={isDisabled}>
             Cancel
           </button>
