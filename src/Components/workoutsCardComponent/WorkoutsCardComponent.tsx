@@ -31,7 +31,7 @@ export default function WorkoutsCardComponent({
 
   let isBooked: boolean = false;
 
-  if (workout._id) isBooked = currentUser.bookedWorkouts.includes(workout._id);
+  if (workout._id) isBooked = currentUser.bookedWorkouts?.includes(workout._id);
 
   return (
     <article className={styles.workoutsComponent}>
