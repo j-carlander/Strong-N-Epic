@@ -1,5 +1,4 @@
 import { User } from "../../Types/User.js";
-import memoryService from "./memoryService.js";
 
 
 const baseURL = "http://127.0.0.1:8000"
@@ -19,11 +18,6 @@ async function login(user: User) {
 
   const response = await fetch(url, fetchOptions);
   const data = await response.json();
-
-  if (response.status === 200) {
-    memoryService.saveSessionValue("JWT_TOKEN", data.jwt);
-    memoryService.saveSessionValue("USER_INFO", data.details);
-  }
 
   return { status: response.status, data };
 }

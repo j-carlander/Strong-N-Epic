@@ -1,5 +1,3 @@
-// import { User } from "./User";
-
 export type WorkoutType = "Spinning" | "Aerobics" | "Gympa" | "Dans" | "Yoga";
 export type City = "Norrtälje" | "Åkersberga";
 export type Recurring = "just_once" | "every_week" | "every_other_week";

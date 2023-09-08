@@ -16,6 +16,7 @@ function getSessionValue(ref: string) {
   return JSON.parse(value);
 }
 
+
 function removeSessionValue(ref: string) {
   sessionStorage.removeItem(ref);
 }
