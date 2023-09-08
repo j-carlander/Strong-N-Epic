@@ -3,6 +3,10 @@ import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import { PatchAction } from "../../service/fetchService";
 import { useUserContext } from "../../Context/useContext";
+// import memoryService from "../../service/memoryService";
+// import fetchService from "../../service/fetchService";
+// import { useEffect, useState } from "react";
+
 
 interface workoutProps {
   workout: Workout;
@@ -15,7 +19,9 @@ export default function WorkoutsCardComponent({
   handleWorkout,
 }: workoutProps): JSX.Element {
 
+
   const currentUser = useUserContext();
+  // const [users, setUsers] = useState([] as User[]);
 
   const formattedStartTime: Date = new Date(workout.startTime);
   const endTime: Date = new Date(
