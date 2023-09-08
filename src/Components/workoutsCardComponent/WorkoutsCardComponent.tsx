@@ -88,7 +88,7 @@ export default function WorkoutsCardComponent({
         <details className={styles.details}>
           <summary>Participants</summary>
           {workout.participants.map((participant) => (
-            <p key={workout._id}>{participant}</p>
+            <p key={participant}>{participant}</p>
           ))}
         </details>
       )}
