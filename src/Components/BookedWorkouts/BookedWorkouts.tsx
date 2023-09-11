@@ -1,24 +1,16 @@
 import { useRef } from 'react';
 import styles from "../WorkoutForm/WorkoutDialogForm.module.css";
-import { PatchAction } from "../../service/fetchService";
-import { useUserContext } from '../../Context/useContext';
 import WorkoutsCardComponent from '../workoutsCardComponent/WorkoutsCardComponent';
 import { Workout } from '../../../Types/Workout';
 
 type Props = {
   workouts: Workout[];
-  handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
+  setWorkouts: (setWorkouts: Workout[]) => void;
 }
 
-export default function BookedWorkouts({workouts, handleWorkout}: Props): JSX.Element {
+export default function BookedWorkouts({workouts, setWorkouts}: Props): JSX.Element {
 
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const currentUser = useUserContext();
-
-  const filteredWorkouts = workouts.filter((workout) => currentUser.details.bookedWorkouts.includes(workout._id!));
-
-
-    console.log(filteredWorkouts)
 
   return (
     <div>
@@ -32,7 +24,7 @@ export default function BookedWorkouts({workouts, handleWorkout}: Props): JSX.El
         onClick={() => dialogRef.current?.close()}
         className={styles["close-btn"]}
         >&#10006;</button>
-         {filteredWorkouts.map((workout) => <WorkoutsCardComponent key={workout._id} workout={workout} handleWorkout={handleWorkout} />)}
+         {workouts.map((workout) => <WorkoutsCardComponent key={workout._id} workout={workout} setWorkouts={setWorkouts} />)}
       </dialog>
     </div>
   )

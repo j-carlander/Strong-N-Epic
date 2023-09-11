@@ -1,17 +1,15 @@
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
-import { PatchAction } from "../../service/fetchService";
 import { useUserContext } from "../../Context/useContext";
 import { useLocation } from "react-router-dom";
+import { handleWorkout } from "../../util/handleWorkout";
 
 interface workoutProps {
   workout: Workout;
-  handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
 }
 
 export default function WorkoutsCardComponent({
   workout,
-  handleWorkout,
 }: workoutProps): JSX.Element {
   const currentUser = useUserContext();
   const location = useLocation();
@@ -76,14 +74,14 @@ export default function WorkoutsCardComponent({
           {!isBookedByCurrentUser ? (
             <button
               className={styles.workoutsComponentButton}
-              onClick={() => handleWorkout(workout, "BOOK")}
+              onClick={() => handleWorkout(workout, currentUser, "BOOK")}
               disabled={isDisabled}>
               Book
             </button>
           ) : (
             <button
               className={styles.workoutsComponentButtonCancel}
-              onClick={() => handleWorkout(workout, "CANCEL")}>
+              onClick={() => handleWorkout(workout, currentUser, "CANCEL")}>
               Cancel
             </button>
           )}

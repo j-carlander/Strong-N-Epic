@@ -14,7 +14,7 @@ import fetchService from "../../service/fetchService";
 import { useUserContext } from "../../Context/useContext";
 
 const emptyWorkout: Workout = {
-  _id: null,
+  _id: '',
   workoutType: workoutTypes[0],
   city: cities[0],
   participants: [],

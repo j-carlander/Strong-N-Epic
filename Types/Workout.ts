@@ -4,7 +4,7 @@ export type City = "Norrtälje" | "Åkersberga" | "Stockholm" | "Vallentuna";
 export type Recurring = "just_once" | "every_week" | "every_other_week";
 
 export interface Workout {
-  _id: string | null;
+  _id: string;
   workoutType: WorkoutType;
   city: City;
   participants: string[];

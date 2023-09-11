@@ -29,7 +29,7 @@ const UserContext = createContext<UserContext>(initialUserValue)
 
 const ContextProvider = ({children}: Props) => {
   
-  const [details, setDetails] = useState<UserDetails>(initialUserValue.details)
+  const [details, setDetails] = useState<UserDetails>(initialUserValue.details);
 
   return (
       <UserContext.Provider value={{details, setDetails}}>
