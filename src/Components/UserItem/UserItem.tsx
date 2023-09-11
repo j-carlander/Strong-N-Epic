@@ -6,12 +6,16 @@ interface UserItemProps {
 }
 
 export function UserItem({ user }: UserItemProps): JSX.Element {
+
   return (
     <details className={styles.details}>
       <summary>
         <h3>{user.username}</h3>
       </summary>
-      <p>{user.role}</p>
+      <p>{user.firstname}</p>
+      <p>{user.lastname}</p>
+      <p>{user.phone}</p>
+      <p>{user.email}</p>
     </details>
   );
 }

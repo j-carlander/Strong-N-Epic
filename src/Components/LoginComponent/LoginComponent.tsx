@@ -1,17 +1,20 @@
 import { FormEvent, useState, useEffect } from 'react'
 import { InputEvent } from '../../../Types/Form';
 import authService from '../../service/authService.js';
-import memoryService from '../../service/memoryService.js';
 import { useNavigate } from 'react-router-dom';
 import './LoginComponent.css';
-import { LoginUser } from '../../../Types/User.js';
+import { User } from '../../../Types/User.js';
+import { useUserContext } from '../../Context/useContext.js';
+import memoryService from '../../service/memoryService.js';
 
 export default function LoginComponent():JSX.Element {
 
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
-  const [loginUser, setLoginUser] = useState({} as LoginUser);
+  const [loginUser, setLoginUser] = useState({} as User);
   const navigate = useNavigate()
+
+  const currentUser = useUserContext();
 
   useEffect(() => {
     setLoginUser({...loginUser, [ref]: value});
@@ -26,19 +29,10 @@ export default function LoginComponent():JSX.Element {
 
   async function submitLoginForm(event: FormEvent) {
     event.preventDefault();
-    await authService.login(loginUser);
-    
-    const userInfo = memoryService.getSessionValue("USER_INFO");
-    
-    if(userInfo.username && userInfo.role === "USER"){
-      navigate("/workout");
-    }else if(userInfo.username && userInfo.role === "ADMIN") {
-      navigate("/admin");
-    }else {
-      memoryService.removeSessionValue("JWT_TOKEN");
-      memoryService.removeSessionValue("USER_INFO");
-      throw new Error("Login went wrong, verify your login credentials");
-    }
+    const userInfo = await authService.login(loginUser);
+
+    currentUser.setDetails(userInfo.data);
+    memoryService.saveSessionValue("USER_INFO", userInfo.data);
   }
 
   return (

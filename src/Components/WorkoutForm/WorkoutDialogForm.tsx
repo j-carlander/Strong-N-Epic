@@ -10,6 +10,7 @@ import {
 } from "../../../Types/Workout";
 import { SelectEvent, InputEvent } from "../../../Types/Form";
 import styles from "./WorkoutDialogForm.module.css";
+import fetchService from "../../service/fetchService";
 
 const emptyWorkout: Workout = {
   _id: null,
@@ -22,10 +23,6 @@ const emptyWorkout: Workout = {
   durationInMin: 0,
 };
 
-// TODO: Remove and use session storage
-const testToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvcnJlQWRtaW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTM5MTE2MTUsImlzcyI6IlRvRG8gUmVhY3QgVFMiLCJzdWIiOiJzZW5kIGFuZCByZWNlaXZlIGFjY2VzcyB0b2tlbiJ9.coIBFkEiBMBTwwU_bHyafPPDVCbCFNswNW3-Eeqrupk";
-
 export function WorkoutDialogForm(): JSX.Element {
   const [newWorkout, setNewWorkout] = useState<Workout>(emptyWorkout);
 
@@ -33,19 +30,8 @@ export function WorkoutDialogForm(): JSX.Element {
 
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault();
-    const url = "http://127.0.0.1:8000/api/workout";
-    const headersList = {
-      Authorization: "Bearer " + testToken,
-      "Content-Type": "application/json",
-    };
-    const bodyContent = JSON.stringify({ ...newWorkout });
-    const options = {
-      method: "POST",
-      headers: headersList,
-      body: bodyContent,
-    };
 
-    const result = await fetch(url, options);
+    const result = await fetchService.postWorkout(newWorkout);
     if (result.status === 201) {
       dialogRef.current?.close();
       setNewWorkout(emptyWorkout);

@@ -7,16 +7,16 @@ import memoryService from "../../service/memoryService";
 export function PageHeader(): JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const navigate = useNavigate();
-
-  const currentUser = memoryService.getSessionValue("USER_INFO");
-
-  console.log(currentUser);
+  const currentUser = useUserContext();
 
   function logOut() {
-    memoryService.removeSessionValue("JWT_TOKEN");
     memoryService.removeSessionValue("USER_INFO");
-    navigate("/login");
+    currentUser.setDetails({
+      jwt: "",
+      role: "",
+      username: "",
+      bookedWorkouts: [],
+    });
   }
 
   // currentUser.role === "ADMIN" ? styles["sign-out-admin-btn"] : styles["sign-out-user-btn"]
