@@ -4,8 +4,6 @@ import { cities } from "../../Types/Workout.js";
 import { PageHeader } from "../Components/PageHeader/PageHeader.js";
 
 export function HomePage(): JSX.Element {
-  // const [formState, setFormState] = useState("LOGIN" as FormState);
-
   return (
     <>
       <PageHeader />

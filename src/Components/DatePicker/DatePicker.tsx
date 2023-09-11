@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { InputEvent } from "../../../Types/Form";
 import { DayBtn, NextWeekBtn, PrevWeekBtn } from "../DayBtn/DayBtns";
 import styles from "./DatePicker.module.css";
@@ -12,8 +11,6 @@ export function DatePicker({
   chosenDate,
   setChosenDate,
 }: DatePickerProps): JSX.Element {
-  // const [chosenDate, setChosenDate] = useState<Date>(new Date()); // TODO: need to be a prop to work as a filter
-
   function theOtherDay(date: Date, offsetDays: number): Date {
     const time: number = date.getTime();
     const newTime: number = time + offsetDays * 86400000; // Num of days to offset * 24 hours in milliseconds

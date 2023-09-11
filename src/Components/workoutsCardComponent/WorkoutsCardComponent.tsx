@@ -1,17 +1,12 @@
-// import React from 'react'
 import styles from "./workoutsCardComponent.module.css";
 import { Workout } from "../../../Types/Workout";
 import { PatchAction } from "../../service/fetchService";
 import { useUserContext } from "../../Context/useContext";
 import { useLocation } from "react-router-dom";
-// import memoryService from "../../service/memoryService";
-// import fetchService from "../../service/fetchService";
-// import { useEffect, useState } from "react";
 
 interface workoutProps {
   workout: Workout;
   handleWorkout: (workout: Workout, action: PatchAction) => Promise<void>;
-  // cancelWorkout: (workout: Workout) => Promise<void>;
 }
 
 export default function WorkoutsCardComponent({
@@ -26,6 +21,9 @@ export default function WorkoutsCardComponent({
     formattedStartTime.getTime() + workout.durationInMin * 60000
   );
 
+  const isAdminAndOnAdminPage =
+    currentUser.details.role === "ADMIN" && location.pathname === "/admin";
+
   let isDisabled: boolean;
 
   if (workout.participants.length >= workout.maxAllowedParticipants) {
@@ -34,10 +32,12 @@ export default function WorkoutsCardComponent({
     isDisabled = false;
   }
 
-  let isBooked: boolean = false;
+  let isBookedByCurrentUser: boolean = false;
 
   if (workout._id)
-    isBooked = currentUser.details.bookedWorkouts.includes(workout._id);
+    isBookedByCurrentUser = currentUser.details.bookedWorkouts.includes(
+      workout._id
+    );
 
   return (
     <article className={styles.workoutsComponent}>
@@ -64,8 +64,7 @@ export default function WorkoutsCardComponent({
           available (of {workout.maxAllowedParticipants})
         </p>
       </div>
-      {currentUser.details.role === "ADMIN" &&
-      location.pathname === "/admin" ? (
+      {isAdminAndOnAdminPage ? (
         <details className={styles.details}>
           <summary>Participants</summary>
           {workout.participants.map((participant) => (
@@ -74,7 +73,7 @@ export default function WorkoutsCardComponent({
         </details>
       ) : (
         <div className={styles.container}>
-          {!isBooked ? (
+          {!isBookedByCurrentUser ? (
             <button
               className={styles.workoutsComponentButton}
               onClick={() => handleWorkout(workout, "BOOK")}
