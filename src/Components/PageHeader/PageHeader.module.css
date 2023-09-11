@@ -57,25 +57,3 @@ dialog ul {
   margin-left: 0.5em;
   cursor: pointer;
 }
-/* .sign-out-user-btn {
-  font-size: 2rem;
-  padding: 0;
-  background: none;
-  border: none;
-  margin-left: 10em;
-  cursor: pointer;
-} */
-
-.logRegContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-}
-
-.logRegContainer * {
-  width: 40%;
-}
-
-.logRegBtn {
-  width: 100%;
-}
