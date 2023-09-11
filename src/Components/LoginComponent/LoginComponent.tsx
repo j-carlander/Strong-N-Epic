@@ -54,10 +54,10 @@ export default function LoginComponent():JSX.Element {
         <button className='login-btn'>Log In</button>
       </form>
       {status === 400 && (
-        <p className='login-warning'>Wrong username or password, try again.</p>
+        <p className='error-para'>Wrong username or password, try again.</p>
       )}
       {status === 500 && (
-        <p className='login-warning'>Server is not responding, try again later.</p>
+        <p className='error-para'>Server is not responding, try again later.</p>
       )}
       <aside className='register-option'>
         <p>Not a member?</p>

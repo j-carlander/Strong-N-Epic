@@ -45,9 +45,17 @@ async function registration(user: User) {
         username: user.username,
       }),
     };
-    const response = await fetch(url, fetchOptions);
-    const data = await response.json();
-    return { status: response.status, data };
+    let data;
+    let response;
+    
+    try {
+      response = await fetch(url, fetchOptions);
+      data = await response.json();
+    }catch {
+      return { status: 500, data:{ msg: "Server is not responding"}};
+    }
+
+    return { status: response.status, data};
 }
 
 const authService = {registration, login}
