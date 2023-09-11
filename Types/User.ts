@@ -14,3 +14,10 @@ export interface User {
   role: UserRole;
   bookedWorkouts: string[];
 }
+
+export type UserDetails = {
+  jwt: string;
+  role: string;
+  username: string;
+  bookedWorkouts: string[];
+}

@@ -12,7 +12,8 @@ export default function LoginComponent():JSX.Element {
   const [value, setValue] = useState('');
   const [ref, setRef] = useState('');
   const [loginUser, setLoginUser] = useState({} as User);
-  const navigate = useNavigate()
+  const [status, setStatus] = useState<number>();
+  const navigate = useNavigate();
 
   const currentUser = useUserContext();
 
@@ -29,10 +30,18 @@ export default function LoginComponent():JSX.Element {
 
   async function submitLoginForm(event: FormEvent) {
     event.preventDefault();
-    const userInfo = await authService.login(loginUser);
+    const authInfo = await authService.login(loginUser);
 
-    currentUser.setDetails(userInfo.data);
-    memoryService.saveSessionValue("USER_INFO", userInfo.data);
+    if(authInfo.status === 200) {
+      setStatus(200);
+      currentUser.setDetails(authInfo.data);
+      memoryService.saveSessionValue("USER_INFO", authInfo.data);
+    }else if(authInfo.status === 400) {
+      setStatus(400);
+    }else {
+      setStatus(500);
+    }
+    
   }
 
   return (
@@ -44,6 +53,12 @@ export default function LoginComponent():JSX.Element {
         <input required className='password-field' onChange={handleLoginInfo} type='password' name='password' value={loginUser.password || ''} id="passwordField"></input>
         <button className='login-btn'>Log In</button>
       </form>
+      {status === 400 && (
+        <p className='login-warning'>Wrong username or password, try again.</p>
+      )}
+      {status === 500 && (
+        <p className='login-warning'>Server is not responding, try again later.</p>
+      )}
       <aside className='register-option'>
         <p>Not a member?</p>
         <button className='change-formstate-btn' onClick={(() => navigate("/register"))}>Sign up</button>
