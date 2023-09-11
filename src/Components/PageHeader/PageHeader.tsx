@@ -1,8 +1,9 @@
 import { useRef } from "react";
-import { Location, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Location, NavLink, useLocation } from "react-router-dom";
 import styles from "./PageHeader.module.css";
 import blackLogo from "../../assets/img/SiteLogoBlack.png";
 import memoryService from "../../service/memoryService";
+import { useUserContext } from "../../Context/useContext";
 
 export function PageHeader(): JSX.Element {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -29,7 +30,7 @@ export function PageHeader(): JSX.Element {
         currentLocation.pathname !== "/login" &&
         currentLocation.pathname !== "/register" && (
           <div className={styles["top-bar"]}>
-            {currentUser.role === "ADMIN" && (
+            {currentUser.details.role === "ADMIN" && (
               <div>
                 <button
                   className={styles["open-menu-btn"]}
@@ -61,12 +62,12 @@ export function PageHeader(): JSX.Element {
             )}
             <div
               className={
-                currentUser.role === "ADMIN"
+                currentUser.details.role === "ADMIN"
                   ? styles["current-user-admin-options"]
                   : styles["current-user-user-options"]
               }>
               <p className="currently-logged-in">
-                Currently logged in as {currentUser.username}{" "}
+                Currently logged in as {currentUser.details.username}{" "}
               </p>
               <button className={styles["sign-out-btn"]} onClick={logOut}>
                 <i className="fa fa-sign-out"></i>
