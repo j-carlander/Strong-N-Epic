@@ -84,8 +84,7 @@ export default function WorkoutsCardComponent({
           ) : (
             <button
               className={styles.workoutsComponentButtonCancel}
-              onClick={() => handleWorkout(workout, "CANCEL")}
-              disabled={isDisabled}>
+              onClick={() => handleWorkout(workout, "CANCEL")}>
               Cancel
             </button>
           )}

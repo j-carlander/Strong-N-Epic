@@ -35,7 +35,7 @@ export function HomePage(): JSX.Element {
           whole new level of trolling supremacy. Here's what to expect:
         </p>
         {workoutTypes.map((type) => {
-          return <p>{type}</p>;
+          return <p key={type}>{type}</p>;
         })}
         <br />
         <p>
@@ -48,7 +48,7 @@ export function HomePage(): JSX.Element {
         <p>
           Our locations: <br />
           {cities.map((city) => {
-            return `${city} `;
+            return ` ${city} `;
           })}
         </p>
       </article>
