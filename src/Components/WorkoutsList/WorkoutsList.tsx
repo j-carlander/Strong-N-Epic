@@ -5,6 +5,7 @@ import fetchService, { PatchAction } from "../../service/fetchService";
 import { useUserContext } from "../../Context/useContext";
 import memoryService from "../../service/memoryService";
 import { useLocation } from "react-router-dom";
+import BookedWorkouts from "../BookedWorkouts/BookedWorkouts";
 
 interface WorkoutListProps {
   filter: FilterOptions;
@@ -63,6 +64,7 @@ export function WorkoutsList({ filter }: WorkoutListProps): JSX.Element {
 
   return (
     <>
+    <BookedWorkouts workouts={workouts} handleWorkout={handleWorkout}/>
       {workouts.length > 0 &&
         workouts
           .filter((workout) =>
