@@ -20,8 +20,6 @@ export function PageHeader(): JSX.Element {
     });
   }
 
-  // currentUser.role === "ADMIN" ? styles["sign-out-admin-btn"] : styles["sign-out-user-btn"]
-
   const currentLocation: Location = useLocation();
   return (
     <header className={styles.header}>

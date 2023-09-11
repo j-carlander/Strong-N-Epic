@@ -34,7 +34,9 @@ export function AdminView(): JSX.Element {
       <section className={styles.container}>
         {activeView === "USERS" && <UserList />}
         {activeView === "WORKOUTS" && <WorkoutDialogForm />}
-        {activeView === "WORKOUTS" && <WorkoutsList />}
+        {activeView === "WORKOUTS" && (
+          <WorkoutsList filter={{ date: new Date() }} />
+        )}
       </section>
     </article>
   );
