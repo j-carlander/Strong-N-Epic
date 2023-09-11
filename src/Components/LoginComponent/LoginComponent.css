@@ -20,3 +20,9 @@
   font-size: 0.8rem;
   padding: 0 1em 0 1em;
 }
+
+.login-warning {
+  margin-top: 1em;
+  color: red;
+  font-size: 1.2rem;
+}

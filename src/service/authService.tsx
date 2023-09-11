@@ -1,6 +1,5 @@
 import { User } from "../../Types/User.js";
 
-
 const baseURL = "http://127.0.0.1:8000"
 
 async function login(user: User) {
@@ -16,9 +15,15 @@ async function login(user: User) {
     }),
   };
 
-  const response = await fetch(url, fetchOptions);
-  const data = await response.json();
+  let data;
+  let response;
 
+  try {
+     response = await fetch(url, fetchOptions);
+     data = await response.json();
+  }catch {
+    return { status: 500, data:{ msg: "Server is not responding"}};
+  }
   return { status: response.status, data };
 }
 

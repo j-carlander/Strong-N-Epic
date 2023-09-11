@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
 import memoryService from '../service/memoryService';
+import { UserDetails } from '../../Types/User';
+
 
 const userDetails = memoryService.getSessionValue("USER_INFO") || {
   jwt: '',
@@ -10,13 +12,6 @@ const userDetails = memoryService.getSessionValue("USER_INFO") || {
 
 type Props = {
   children?:ReactNode;
-}
-
-type UserDetails = {
-  jwt: string;
-  role: string;
-  username: string;
-  bookedWorkouts: string[];
 }
 
 type UserContext = {
