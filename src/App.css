@@ -1,0 +1,13 @@
+.logRegContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.logRegContainer * {
+  width: 40%;
+}
+
+.logRegBtn {
+  width: 100%;
+}

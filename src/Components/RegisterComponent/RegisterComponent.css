@@ -27,3 +27,9 @@
   gap: 0.5em;
   margin-top: 7em;
 }
+
+.error-para {
+  margin-top: 1em;
+  color: red;
+  font-size: 1.2rem;
+}

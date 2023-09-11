@@ -11,6 +11,7 @@ import {
 import { SelectEvent, InputEvent } from "../../../Types/Form";
 import styles from "./WorkoutDialogForm.module.css";
 import fetchService from "../../service/fetchService";
+import { useUserContext } from "../../Context/useContext";
 
 const emptyWorkout: Workout = {
   _id: null,
@@ -26,17 +27,24 @@ const emptyWorkout: Workout = {
 export function WorkoutDialogForm(): JSX.Element {
   const [newWorkout, setNewWorkout] = useState<Workout>(emptyWorkout);
 
+  const currnetUser = useUserContext();
+
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault();
-
-    const result = await fetchService.postWorkout(newWorkout);
-    if (result.status === 201) {
-      dialogRef.current?.close();
-      setNewWorkout(emptyWorkout);
+    try {
+      const result = await fetchService.postWorkout(
+        currnetUser.details.jwt,
+        newWorkout
+      );
+      if (result.status === 201) {
+        dialogRef.current?.close();
+        setNewWorkout(emptyWorkout);
+      }
+    } catch (err) {
+      throw new Error("Wasn't able to POST a new workout");
     }
-    throw new Error("Wasn't able to POST a new workout");
   }
 
   return (

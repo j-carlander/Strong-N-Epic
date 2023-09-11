@@ -21,7 +21,7 @@
   padding: 0 1em 0 1em;
 }
 
-.login-warning {
+.error-para {
   margin-top: 1em;
   color: red;
   font-size: 1.2rem;
