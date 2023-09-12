@@ -2,17 +2,20 @@ import { NavLink } from "react-router-dom";
 import { workoutTypes } from "../../Types/Workout.js";
 import { cities } from "../../Types/Workout.js";
 import { PageHeader } from "../Components/PageHeader/PageHeader.js";
+import styles from "./styles/HomePage.module.css";
 
 export function HomePage(): JSX.Element {
   return (
     <>
       <PageHeader />
-      <div className="logRegContainer">
-        <NavLink to={"/register"}>
-          <button className="logRegBtn">Register</button>
+      <div className={styles["logRegContainer"]}>
+        <NavLink to={"/register"} className={styles["logRegBtn"]}>
+          {/* <button >Register</button> */}
+          Register
         </NavLink>
-        <NavLink to={"/login"}>
-          <button className="logRegBtn">Login</button>
+        <NavLink to={"/login"} className={styles["logRegBtn"]}>
+          {/* <button className="logRegBtn">Login</button> */}
+          Login
         </NavLink>
       </div>
       <article style={{ textAlign: "center" }}>

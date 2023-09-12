@@ -29,7 +29,7 @@ export function WorkoutPage(): JSX.Element {
   return (
     <>
       <PageHeader />
-      <BookedWorkouts workouts={bookedWorkouts} setWorkouts={setWorkouts}/>
+      <BookedWorkouts workouts={bookedWorkouts}/>
       <DatePicker chosenDate={chosenDate} setChosenDate={setChosenDate} />
       <WorkoutsList workouts={filteredWorkouts}/>
     </>

@@ -23,6 +23,8 @@ dialog[open] {
   border: none;
   border-right: 1px solid #333;
   border-bottom: 1px solid #333;
+
+  background-color: #3a3a3a;
 }
 
 dialog ul {
@@ -36,14 +38,12 @@ dialog ul {
   font-size: 2rem;
   font-weight: 700;
   cursor: pointer;
+  color: #fff;
 }
 
-.current-user-user-options {
+.current-user-options {
   display: flex;
-  margin-left: 25em;
-}
-.current-user-admin-options {
-  display: flex;
+  align-items: center;
 }
 .logo {
   width: 100%;
@@ -56,4 +56,9 @@ dialog ul {
   border: none;
   margin-left: 0.5em;
   cursor: pointer;
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
 }
