@@ -1,0 +1,16 @@
+.datepicker-container {
+  width: 100%;
+  padding: 0 1em;
+}
+
+.day-btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-block: 0.2em;
+}
+
+.prev-next-btn-container {
+  display: flex;
+  justify-content: space-around;
+}

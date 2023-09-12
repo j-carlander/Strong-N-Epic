@@ -1,0 +1,44 @@
+.day-btn {
+  padding: 0;
+  min-width: max(13%, 35px);
+  aspect-ratio: 1 / 1;
+  margin-inline: 0.2em;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.day-btn * {
+  margin: 0;
+  padding: 0;
+}
+
+.day-btn:nth-child(4) {
+  border: 3px solid #5c8374;
+}
+
+.date {
+  text-align: left;
+  margin: .1rem;
+  font-size: smaller;
+}
+
+.day {
+  font-size: min(4vw, 1.5em);
+}
+
+.week-btn {
+  background: none;
+  border: 2px solid transparent;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+}
+.week-btn:disabled {
+  color: rgba(255, 255, 255, 0.151);
+}
+
+.week-btn:hover:not([disabled]) {
+  border-color: #5c8374;
+}
