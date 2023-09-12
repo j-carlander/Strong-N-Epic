@@ -3,7 +3,7 @@ import { InputEvent } from "../../../Types/Form";
 import authService from "../../service/authService.js";
 import { useNavigate } from "react-router-dom";
 import "./LoginComponent.css";
-import { User } from "../../../Types/User.js";
+import { User, UserDetails } from "../../../Types/User.js";
 import { useUserContext } from "../../Context/useContext.js";
 import memoryService from "../../service/memoryService.js";
 
@@ -32,7 +32,7 @@ export default function LoginComponent(): JSX.Element {
 
     if (authInfo.status === 200) {
       setStatus(200);
-      currentUser.setDetails(authInfo.data);
+      currentUser.setDetails(authInfo.data as UserDetails);
       memoryService.saveSessionValue("USER_INFO", authInfo.data);
     } else if (authInfo.status === 400) {
       setStatus(400);
@@ -70,10 +70,10 @@ export default function LoginComponent(): JSX.Element {
         <button className="login-btn">Log In</button>
       </form>
       {status === 400 && (
-        <p className='error-para'>Wrong username or password, try again.</p>
+        <p className="error-para">Wrong username or password, try again.</p>
       )}
       {status === 500 && (
-        <p className='error-para'>Server is not responding, try again later.</p>
+        <p className="error-para">Server is not responding, try again later.</p>
       )}
       <aside className="register-option">
         <p>Not a member?</p>

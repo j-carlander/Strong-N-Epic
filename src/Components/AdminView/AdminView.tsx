@@ -6,21 +6,21 @@ import { WorkoutDialogForm } from "../WorkoutForm/WorkoutDialogForm";
 import { useUserContext } from "../../Context/useContext";
 import fetchService from "../../service/fetchService";
 import { Workout } from "../../../Types/Workout";
+import { UserContext } from "../../Context/contextProvider";
 
 type ActiveView = "USERS" | "WORKOUTS";
 
 export function AdminView(): JSX.Element {
-const currentUser = useUserContext();
+  const currentUser: UserContext = useUserContext();
 
   const [activeView, setActiveView] = useState<ActiveView>("USERS");
-  const [workouts, setWorkouts] = useState([] as Workout[]);
-  
+  const [workouts, setWorkouts] = useState<Workout[]>([] as Workout[]);
+
   const token = currentUser.details.jwt;
 
   useEffect(() => {
     fetchService.getWorkouts(token).then(setWorkouts);
   }, [token]);
-
 
   return (
     <article className={styles.wrapper}>
@@ -47,9 +47,7 @@ const currentUser = useUserContext();
       <section className={styles.container}>
         {activeView === "USERS" && <UserList />}
         {activeView === "WORKOUTS" && <WorkoutDialogForm />}
-        {activeView === "WORKOUTS" && (
-          <WorkoutsList workouts={workouts}/>
-        )}
+        {activeView === "WORKOUTS" && <WorkoutsList workouts={workouts} />}
       </section>
     </article>
   );

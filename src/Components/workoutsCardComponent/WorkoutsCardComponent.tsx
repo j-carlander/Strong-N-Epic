@@ -19,7 +19,7 @@ export default function WorkoutsCardComponent({
     formattedStartTime.getTime() + workout.durationInMin * 60000
   );
 
-  const isAdminAndOnAdminPage =
+  const isAdminAndOnAdminPage: boolean =
     currentUser.details.role === "ADMIN" && location.pathname === "/admin";
 
   let isDisabled: boolean;

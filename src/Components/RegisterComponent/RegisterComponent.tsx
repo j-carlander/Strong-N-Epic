@@ -3,18 +3,18 @@ import { InputEvent, SelectEvent } from '../../../Types/Form.js';
 import authService from '../../service/authService.js';
 import './RegisterComponent.css';
 import { User } from '../../../Types/User.js';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 
 export default function RegisterComponent():JSX.Element {
 
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   
-  const [regUser, setRegUser] = useState({} as User);
-  const [value, setValue] = useState('');
-  const [ref, setRef] = useState('');
+  const [regUser, setRegUser] = useState<User>({} as User);
+  const [value, setValue] = useState<string>('');
+  const [ref, setRef] = useState<string>('');
   const [status, setStatus] = useState<number>();
-  const [confirmedPw, setConfirmedPw] = useState('');
+  const [confirmedPw, setConfirmedPw] = useState<string>('');
 
   useEffect(() => {
     setRegUser({...regUser, [ref]: value});

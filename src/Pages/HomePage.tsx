@@ -10,11 +10,9 @@ export function HomePage(): JSX.Element {
       <PageHeader />
       <div className={styles["logRegContainer"]}>
         <NavLink to={"/register"} className={styles["logRegBtn"]}>
-          {/* <button >Register</button> */}
           Register
         </NavLink>
         <NavLink to={"/login"} className={styles["logRegBtn"]}>
-          {/* <button className="logRegBtn">Login</button> */}
           Login
         </NavLink>
       </div>

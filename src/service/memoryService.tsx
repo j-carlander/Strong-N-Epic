@@ -6,16 +6,15 @@ function saveSessionValue(ref: string, value: string | object) {
 
 function getSessionValue(ref: string) {
   const value = sessionStorage.getItem(ref);
-  
-  if(value === null) return;
-  
-  if(!value) {
+
+  if (value === null) return;
+
+  if (!value) {
     throw new Error('No value in key "USER_INFO" exists');
   }
-  
+
   return JSON.parse(value);
 }
-
 
 function removeSessionValue(ref: string) {
   sessionStorage.removeItem(ref);

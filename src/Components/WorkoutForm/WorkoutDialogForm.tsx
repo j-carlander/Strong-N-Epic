@@ -14,7 +14,7 @@ import fetchService from "../../service/fetchService";
 import { useUserContext } from "../../Context/useContext";
 
 const emptyWorkout: Workout = {
-  _id: '',
+  _id: "",
   workoutType: workoutTypes[0],
   city: cities[0],
   participants: [],
@@ -34,7 +34,7 @@ export function WorkoutDialogForm(): JSX.Element {
   async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault();
     try {
-      const result = await fetchService.postWorkout(
+      const result: Response = await fetchService.postWorkout(
         currnetUser.details.jwt,
         newWorkout
       );

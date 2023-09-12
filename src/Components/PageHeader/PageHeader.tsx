@@ -10,7 +10,7 @@ export function PageHeader(): JSX.Element {
 
   const currentUser = useUserContext();
 
-  function logOut() {
+  function logOut(): void {
     memoryService.removeSessionValue("USER_INFO");
     currentUser.setDetails({
       jwt: "",
