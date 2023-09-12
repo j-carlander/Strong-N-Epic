@@ -8,8 +8,8 @@ import { useUserContext } from "../../Context/useContext.js";
 import memoryService from "../../service/memoryService.js";
 
 export default function LoginComponent(): JSX.Element {
-  const [value, setValue] = useState("");
-  const [ref, setRef] = useState("");
+  const [value, setValue] = useState<string>("");
+  const [ref, setRef] = useState<string>("");
   const [loginUser, setLoginUser] = useState({} as User);
   const [status, setStatus] = useState<number>();
   const navigate = useNavigate();

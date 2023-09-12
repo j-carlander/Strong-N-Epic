@@ -10,7 +10,7 @@ export default function RegisterComponent():JSX.Element {
 
   const navigate: NavigateFunction = useNavigate();
   
-  const [regUser, setRegUser] = useState<User>({} as User);
+  const [regUser, setRegUser] = useState({} as User);
   const [value, setValue] = useState<string>('');
   const [ref, setRef] = useState<string>('');
   const [status, setStatus] = useState<number>();
