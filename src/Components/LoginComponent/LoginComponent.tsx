@@ -3,7 +3,7 @@ import { InputEvent } from "../../../Types/Form";
 import authService from "../../service/authService.js";
 import { useNavigate } from "react-router-dom";
 import "./LoginComponent.css";
-import { User, UserDetails } from "../../../Types/User.js";
+import { User } from "../../../Types/User.js";
 import { useUserContext } from "../../Context/useContext.js";
 import memoryService from "../../service/memoryService.js";
 
@@ -30,9 +30,9 @@ export default function LoginComponent(): JSX.Element {
     event.preventDefault();
     const authInfo = await authService.login(loginUser);
 
-    if (authInfo.status === 200) {
+    if (authInfo.status === 200 && !("msg" in authInfo.data)) {
       setStatus(200);
-      currentUser.setDetails(authInfo.data as UserDetails);
+      currentUser.setDetails(authInfo.data);
       memoryService.saveSessionValue("USER_INFO", authInfo.data);
     } else if (authInfo.status === 400) {
       setStatus(400);
