@@ -17,7 +17,7 @@ export interface User {
 
 export type UserDetails = {
   jwt: string;
-  role: string;
+  role: UserRole;
   username: string;
   bookedWorkouts: string[];
-}
+};
